@@ -1,0 +1,1478 @@
+/* ==========================================================
+   Orion IA — Desktop Stylesheet (v3.4.9i build 350i)
+   Correção definitiva de alinhamento do search + chips
+   ========================================================== */
+
+/* Orion — Desktop (>=1200px)
+   Centraliza visualmente hero e chat controlando a variável --hero-offset-x */
+@media (min-width: 1200px){
+  :root{ --hero-offset-x: -20px; }
+}
+@media (min-width: 1440px){
+  :root{ --hero-offset-x: -18px; }
+}
+@media (min-width: 1680px){
+  :root{ --hero-offset-x: -16px; }
+}
+
+/* Conforto visual do input */
+.hero .search .input,
+.hero .search form {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+/* Ajuste fino do respiro à direita do botão azul */
+@media (min-width: 1200px){
+  .hero .search input[type="text"],
+  .hero .search input[type="search"]{
+    padding-right: 72px;
+  }
+}
+
+/* ===== Orion IA v3.4.9i — alinhamento do search + chips sem quebrar o flex ===== */
+@media (min-width:1200px){
+  :root{ --search-shift-x:-32px; } /* ajuste fino: -26px, -32px, -40px */
+
+  /* Desloca visualmente sem afetar o flow/flex */
+  .main .intro .search{
+    position: relative;
+    transform: translateX(var(--search-shift-x));
+    transition: transform .25s ease;
+    margin-left: 0 !important;
+    left: auto !important;
+    right: auto !important;
+  }
+
+  .main .intro .chips{
+    transform: translateX(var(--search-shift-x));
+    transition: transform .25s ease;
+    left: auto !important;
+    right: auto !important;
+    margin-left: 0 !important;
+  }
+
+  /* (opcional) microcompensação do botão azul */
+  /* .main .intro .search{
+       transform: translateX(calc(var(--search-shift-x) - 6px));
+     } */
+}
+
+/* Mobile/Tablet: tudo centralizado sem deslocamento */
+@media (max-width:1199.98px){
+  .main .intro .search,
+  .main .intro .chips{
+    transform: none !important;
+    left: auto !important;
+    margin-left: 0 !important;
+  }
+}
+
+/* Garantia do layout dos chips (mantém o visual original) */
+.main .intro .chips{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+
+/* Orion Frosted Glass Effect – Header Buttons */
+header .btn {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+header .btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  background: radial-gradient(circle at 30% 25%, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.05) 40%, transparent 70%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  opacity: 0.9;
+}
+
+header .btn:hover::after {
+  opacity: 1;
+  transform: scale(1.02);
+  background: radial-gradient(circle at 35% 20%, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.1) 40%, transparent 70%);
+}
+
+
+/* === Orion Frosted Glass + Aura Adaptativa === */
+header .btn {
+  position: relative;
+  overflow: hidden;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-weight: 500;
+  transition: all 0.35s ease;
+  z-index: 1;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  box-shadow: 0 0 0 transparent;
+}
+
+/* Reflexo de vidro */
+header .btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  background: radial-gradient(circle at 30% 25%, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.05) 40%, transparent 75%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  opacity: 0.85;
+}
+
+/* Aura energética */
+header .btn::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 10px;
+  background: radial-gradient(circle at 50% 50%, var(--aura-start) 0%, var(--aura-end) 40%, transparent 70%);
+  filter: blur(12px);
+  opacity: 0;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  z-index: -1;
+}
+
+/* Hover premium */
+header .btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 18px var(--aura-glow);
+}
+
+header .btn:hover::before {
+  opacity: 1;
+  transform: scale(1.02);
+}
+
+header .btn:hover::after {
+  opacity: 1;
+  transform: scale(1.03);
+  background: radial-gradient(circle at 35% 20%, rgba(255,255,255,0.32) 0%, rgba(255,255,255,0.1) 45%, transparent 75%);
+}
+
+/* === Modo Escuro === */
+body.dark header .btn {
+  --btn-bg: rgba(255, 255, 255, 0.06);
+  --btn-text: #fff;
+  --aura-start: rgba(138, 43, 226, 0.25);
+  --aura-end: rgba(0, 91, 255, 0.25);
+  --aura-glow: rgba(0, 91, 255, 0.35);
+}
+
+/* === Modo Claro === */
+body.light header .btn {
+  --btn-bg: rgba(255, 255, 255, 0.65);
+  --btn-text: #111;
+  --aura-start: rgba(162, 102, 255, 0.25);
+  --aura-end: rgba(0, 135, 255, 0.25);
+  --aura-glow: rgba(0, 135, 255, 0.3);
+}
+
+/* === Ajuste: efeito sempre visível no MODO CLARO === */
+body.light header .btn {
+  /* um pouco mais de “vidro” e sombra suave em repouso */
+  --btn-bg: rgba(255, 255, 255, 0.72);
+  --btn-text: #111;
+  --aura-start: rgba(162, 102, 255, 0.28);  /* roxo claro */
+  --aura-end:   rgba(0, 135, 255, 0.28);    /* azul claro */
+  --aura-glow:  rgba(0, 135, 255, 0.28);
+  box-shadow:
+    0 10px 22px rgba(0,0,0,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.65);
+}
+
+/* reflexo de vidro SEMPRE visível no claro */
+body.light header .btn::after {
+  opacity: 0.95;                            /* antes ~0.85 */
+  background: radial-gradient(circle at 28% 22%,
+               rgba(255,255,255,0.35) 0%,
+               rgba(255,255,255,0.10) 42%,
+               transparent 72%);
+}
+
+/* aura SEMPRE visível no claro (mais suave) */
+body.light header .btn::before {
+  opacity: 0.55;                            /* antes 0 no repouso */
+  filter: blur(14px);
+  transform: scale(1.0);
+}
+
+/* intensifica no hover */
+body.light header .btn:hover {
+  box-shadow:
+    0 14px 28px rgba(0,0,0,0.10),
+    0 0 18px var(--aura-glow);
+}
+body.light header .btn:hover::before {
+  opacity: 0.85;
+  transform: scale(1.04);
+}
+body.light header .btn:hover::after {
+  opacity: 1;
+  background: radial-gradient(circle at 32% 18%,
+               rgba(255,255,255,0.42) 0%,
+               rgba(255,255,255,0.14) 45%,
+               transparent 75%);
+}
+
+/* Botão de envio dentro do input */
+.search-send {
+  position: relative;
+  border: 0;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #8A2BE2, #2F7BFF);
+  color: #fff;
+  width: 56px; height: 44px;
+  box-shadow: 0 10px 22px rgba(0,0,0,.18);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.search-send::after{ /* reflexo vidro */
+  content:""; position:absolute; inset:0; border-radius:12px;
+  background: radial-gradient(circle at 30% 25%, rgba(255,255,255,.28) 0%, rgba(255,255,255,.08) 42%, transparent 72%);
+  mix-blend-mode: screen; pointer-events:none;
+}
+.search-send::before{ /* aura */
+  content:""; position:absolute; inset:-3px; border-radius:14px;
+  filter: blur(10px); opacity:.55; pointer-events:none;
+  background: radial-gradient(circle at 50% 50%, rgba(138,43,226,.28) 0%, rgba(0,123,255,.28) 40%, transparent 70%);
+}
+.search-send:hover{ transform: translateY(-1px); box-shadow: 0 14px 28px rgba(0,0,0,.22); }
+
+/* light mode: um pouco mais claro */
+body.light .search-send{ box-shadow: 0 10px 20px rgba(0,0,0,.12); }
+body.light .search-send::before{ opacity:.65; filter: blur(12px); }
+
+header .btn:focus-visible,
+.search-send:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 3px rgba(255,255,255,.75),
+    0 0 0 6px rgba(138,43,226,.28),
+    0 0 20px rgba(0,91,255,.25);
+}
+body.light header .btn:focus-visible,
+body.light .search-send:focus-visible {
+  box-shadow:
+    0 0 0 3px rgba(255,255,255,.9),
+    0 0 0 6px rgba(0,135,255,.24),
+    0 0 20px rgba(0,135,255,.18);
+}
+
+/* ===== Orion – Hover forte e específico no botão de envio ===== */
+/* aplica tanto em .search-send quanto no #sendBtn */
+button.search-send,
+button#sendBtn {
+  position: relative;
+  z-index: 1;
+  border: 0;
+  border-radius: 12px;
+  background: linear-gradient(145deg,#8A2BE2,#2F7BFF);
+  color:#fff;
+  width:56px; height:44px;
+  box-shadow: 0 10px 22px rgba(0,0,0,.18);
+  transition: transform .28s ease, box-shadow .28s ease, filter .28s ease;
+  cursor:pointer;
+}
+
+/* aura (fique visível) */
+button.search-send::before,
+button#sendBtn::before{
+  content:"";
+  position:absolute; inset:-3px; border-radius:14px;
+  background: radial-gradient(circle at 50% 50%,
+              rgba(138,43,226,.30) 0%,
+              rgba(0,123,255,.30) 40%,
+              transparent 70%);
+  filter: blur(12px);
+  opacity:.55; pointer-events:none; z-index:-1;
+  transition: opacity .28s ease, filter .28s ease;
+}
+
+/* reflexo de vidro */
+button.search-send::after,
+button#sendBtn::after{
+  content:"";
+  position:absolute; inset:0; border-radius:12px;
+  background: radial-gradient(circle at 30% 25%,
+              rgba(255,255,255,.30) 0%,
+              rgba(255,255,255,.10) 42%,
+              transparent 72%);
+  mix-blend-mode: screen; pointer-events:none;
+  opacity:.9; transition: opacity .28s ease;
+}
+
+/* HOVER – mais evidente */
+button.search-send:hover,
+button#sendBtn:hover{
+  transform: translateY(-4px) scale(1.06);
+  box-shadow: 0 18px 40px rgba(0,0,0,.32);
+  filter: brightness(1.06);
+}
+button.search-send:hover::before,
+button#sendBtn:hover::before{ opacity:.95; filter: blur(16px); }
+button.search-send:hover::after,
+button#sendBtn:hover::after{ opacity:1; }
+
+/* ÍCONE move mais no hover */
+button.search-send svg,
+button#sendBtn svg{ transition: transform .24s ease; will-change: transform; }
+button.search-send:hover svg,
+button#sendBtn:hover svg{ transform: translateX(3px); }
+
+/* Light mode: sombras mais suaves mas efeito presente */
+body.light button.search-send,
+body.light button#sendBtn{ box-shadow:0 10px 20px rgba(0,0,0,.12); }
+body.light button.search-send:hover,
+body.light button#sendBtn:hover{ box-shadow:0 16px 30px rgba(0,0,0,.18); }
+
+
+/* ===== Orion v3.5.0b — Hover ajustado nos botões de ferramentas (chips) ===== */
+
+/* estilo base continua igual */
+.chips .chip {
+  transition: all .25s ease;
+}
+
+/* hover no modo escuro */
+body.dark .chips .chip:hover {
+  background: rgba(255,255,255,0.15) !important;
+  color: #fff !important;
+}
+
+/* hover no modo claro */
+body.light .chips .chip:hover {
+  background: rgba(0,0,0,0.08) !important;
+  color: #000 !important;
+  border-color: rgba(0,0,0,0.15) !important;
+}
+
+/* para chips PRO (mantém contraste no gradiente) */
+.chips .chip.is-pro:hover::after {
+  filter: brightness(1.1);
+}
+
+/* ===== Orion v3.5.0c — Selo 👑 nos botões PRO ===== */
+.chips .chip.is-pro {
+  position: relative;
+  overflow: visible;
+}
+
+/* Cria o selo com coroa dourada */
+.chips .chip.is-pro::after {
+  content: "👑";
+  position: absolute;
+  top: -6px;
+  right: -4px;
+  font-size: 12px;
+  line-height: 1;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,.3));
+  pointer-events: none;
+  transition: transform .25s ease;
+}
+
+/* Efeito suave no hover */
+.chips .chip.is-pro:hover::after {
+  transform: scale(1.15);
+}
+
+
+/* ===== Orion v3.5.0d — Shine da coroa PRO (hover) ===== */
+.chips .chip.is-pro{
+  position: relative;
+  overflow: visible;
+}
+
+/* Coroa (já existente) */
+.chips .chip.is-pro::after{
+  content: "👑";
+  position: absolute;
+  top: -6px;
+  right: -4px;
+  font-size: 12px;
+  line-height: 1;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,.30));
+  transition: transform .25s ease;
+}
+
+/* Reflexo (flare) — criado por baixo da coroa */
+.chips .chip.is-pro::before{
+  content: "";
+  position: absolute;
+  top: -10px;
+  right: -8px;
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+  background: radial-gradient(closest-side,
+              rgba(255,223,100,.90),
+              rgba(255,223,100,.35) 40%,
+              rgba(255,223,100,0) 70%);
+  border-radius: 50%;
+  opacity: 0;
+  transform: translateX(-8px) scale(.6);
+  filter: blur(.5px);
+}
+
+/* Hover: leve zoom na coroa + animação de glow e varredura */
+.chips .chip.is-pro:hover::after{
+  transform: scale(1.15);
+  animation: orion-crown-glow 1200ms ease-out 1;
+}
+.chips .chip.is-pro:hover::before{
+  animation: orion-crown-sweep 900ms ease-out 1;
+}
+
+/* Tema claro: tornar o rastro (movimento) mais escuro/visível */
+body.light .chips .chip.is-pro::before {
+  /* deixa o rastro mais “encorpado” no claro */
+  opacity: .75;                         /* antes ~.45–.55 */
+  filter: drop-shadow(0 0 4px rgba(255, 160, 0, .35));
+  mix-blend-mode: multiply;             /* escurece sobre fundo claro */
+
+  /* rastro mais escuro e definido */
+  background: linear-gradient(
+    90deg,
+    rgba(0,0,0,0) 0%,
+    rgba(255, 170, 0, .45) 35%,
+    rgba(0,0,0,0) 70%
+  );
+  /* não redefina animation aqui para não matar o movimento do hover */
+}
+
+/* Opcional: no hover, só reforça um pouco sem estourar */
+body.light .chips .chip.is-pro:hover::before {
+  opacity: .9;
+}
+
+
+/* Glow pulsante suave */
+@keyframes orion-crown-glow{
+  0%   { text-shadow: 0 0 0 rgba(255,215,0,0), 0 0 0 rgba(255,215,0,0); }
+  30%  { text-shadow: 0 0 2px rgba(255,215,0,.70), 0 0 6px rgba(255,215,0,.60); }
+  60%  { text-shadow: 0 0 3px rgba(255,215,0,.90), 0 0 10px rgba(255,215,0,.70); }
+  100% { text-shadow: 0 0 0 rgba(255,215,0,0), 0 0 0 rgba(255,215,0,0); }
+}
+
+/* Varredura do reflexo (da esquerda pra direita) */
+@keyframes orion-crown-sweep{
+  0%   { opacity:0; transform: translateX(-10px) scale(.5); }
+  25%  { opacity:.9; }
+  60%  { opacity:.6; transform: translateX(10px) scale(1); }
+  100% { opacity:0; transform: translateX(16px) scale(1.1); }
+}
+
+/* Acessibilidade: respeita usuários que preferem menos movimento */
+@media (prefers-reduced-motion: reduce){
+  .chips .chip.is-pro:hover::after,
+  .chips .chip.is-pro:hover::before{ animation: none !important; }
+}
+
+/* === Tokens de cor === */
+:root{
+  --crown-dark:  #FFD54F;
+  --crown-light: #FFC107;
+  --crown-sweep-light: rgba(255,170,0,.45);
+  --crown-sweep-shadow: rgba(255,160,0,.35);
+}
+
+/* Brilho estático (coroa) – tema claro */
+body.light .chips .chip.is-pro::after{
+  background: radial-gradient(closest-side,
+    color-mix(in srgb, var(--crown-light) 90%, transparent) 40%,
+    color-mix(in srgb, var(--crown-light) 40%, transparent) 60%,
+    transparent 80%
+  );
+  filter: drop-shadow(0 0 6px rgba(255,193,7,.8)) brightness(1.3);
+}
+
+/* Rastro em movimento (sweep) – tema claro, mais escuro/visível */
+body.light .chips .chip.is-pro::before{
+  opacity: .75;
+  background: linear-gradient(90deg, transparent 0%, var(--crown-sweep-light) 35%, transparent 70%);
+  filter: drop-shadow(0 0 4px var(--crown-sweep-shadow));
+  mix-blend-mode: multiply; /* dá corpo no fundo claro */
+}
+
+/* Mantém o tema escuro como estava */
+body.dark .chips .chip.is-pro::after{
+  background: radial-gradient(closest-side,
+    color-mix(in srgb, var(--crown-dark) 90%, transparent) 40%,
+    color-mix(in srgb, var(--crown-dark) 40%, transparent) 60%,
+    transparent 80%
+  );
+  filter: drop-shadow(0 0 6px rgba(255,215,0,.9));
+}
+
+
+/* Focus visível por teclado nos chips (desktop e geral) */
+.chips .chip:focus-visible{
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0,91,255,.25), 0 6px 18px rgba(0,0,0,.12);
+}
+
+/* Hover dos chips – sem “pulo” de layout */
+.chips .chip{
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
+}
+.chips .chip:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px rgba(0,0,0,.10);
+}
+
+/* Respeita quem prefere menos movimento */
+@media (prefers-reduced-motion: reduce){
+  .chips .chip,
+  .chips .chip:hover,
+  .chips .chip.is-pro:hover::before,
+  .chips .chip.is-pro:hover::after{
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* === Ajuste de borda tracejada dos chips no tema claro === */
+body.light .chips .chip {
+  border: 1px dashed rgba(0, 0, 0, 0.18); /* antes estava ~0.08 */
+  background-color: rgba(255, 255, 255, 0.6); /* leve preenchimento */
+  backdrop-filter: blur(6px);
+}
+
+/* Mantém consistência no hover */
+body.light .chips .chip:hover {
+  border-color: rgba(0, 0, 0, 0.28);
+  background-color: rgba(255, 255, 255, 0.75);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Tema escuro permanece igual */
+body.dark .chips .chip {
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+
+/* ORION CHAT FAB — Premium Minimal Bubble */
+.orion-chat-fab{
+  position:fixed; right:28px; bottom:28px;
+  width:64px; height:64px; border-radius:999px; border:1px solid rgba(255,255,255,.18);
+  display:grid; place-items:center; cursor:pointer; z-index:9999;
+  color:#fff;
+  background: radial-gradient(120% 120% at 20% 20%, rgba(255,255,255,.14) 0%, rgba(255,255,255,0) 60%),
+              linear-gradient(145deg, #8A2BE2, #2F7BFF);
+  box-shadow:
+    0 10px 28px rgba(47,123,255,.35),
+    0 4px 12px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.35);
+  backdrop-filter: blur(12px) saturate(160%);
+  transition: transform .2s ease, box-shadow .25s ease, background .25s ease;
+}
+.orion-chat-fab svg{ width:28px; height:28px; filter: drop-shadow(0 1px 2px rgba(0,0,0,.25)); }
+
+.orion-chat-fab:hover{
+  transform: translateY(-3px) scale(1.03);
+  box-shadow:
+    0 14px 36px rgba(138,43,226,.45),
+    0 6px 16px rgba(0,0,0,.38),
+    inset 0 1px 1px rgba(255,255,255,.45);
+}
+.orion-chat-fab:active{ transform: translateY(0) scale(.98); }
+
+@media (prefers-reduced-motion:no-preference){
+  .orion-chat-fab{ animation: orionPulse 3.6s ease-in-out infinite; }
+  @keyframes orionPulse{
+    0%   { box-shadow:0 10px 28px rgba(47,123,255,.35),0 4px 12px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.35); }
+    50%  { box-shadow:0 16px 44px rgba(138,43,226,.50),0 6px 18px rgba(0,0,0,.40),inset 0 1px 1px rgba(255,255,255,.45); }
+    100% { box-shadow:0 10px 28px rgba(47,123,255,.35),0 4px 12px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.35); }
+  }
+}
+
+/* Tema claro */
+html.light .orion-chat-fab{
+  border-color: rgba(0,0,0,.12);
+  box-shadow:
+    0 10px 22px rgba(0,0,0,.18),
+    inset 0 1px 0 rgba(255,255,255,.65);
+}
+
+.orion-chat-fab svg {
+  width: 50px;   /* antes era 28px */
+  height: 50px;  /* antes era 28px */
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,.25));
+  transform: translateY(1px); /* mantém o alinhamento vertical */
+}
+
+/* Reflexo Orion Frosted Glass */
+.orion-chat-fab::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.05) 35%, transparent 60%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  transition: opacity .3s ease;
+  opacity: 0.9;
+}
+
+/* Suaviza o reflexo no hover */
+.orion-chat-fab:hover::after {
+  opacity: 1;
+  background: radial-gradient(circle at 35% 20%, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.08) 40%, transparent 70%);
+}
+
+/* === Orion Header – Flare Energético Cósmico === */
+header {
+  position: relative;
+  z-index: 10;
+  overflow: visible;
+}
+
+/* Faixa luminosa sob o header */
+header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg,
+    rgba(138,43,226,0.0) 0%,
+    rgba(138,43,226,0.45) 20%,
+    rgba(47,123,255,0.6) 50%,
+    rgba(138,43,226,0.45) 80%,
+    rgba(47,123,255,0.0) 100%);
+  filter: blur(12px) saturate(140%);
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  pointer-events: none;
+}
+
+/* Quando o usuário rolar a página */
+body.scrolled header::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Animação contínua de energia */
+@keyframes orionFlareMove {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 200% 0%; }
+}
+header::after {
+  background-size: 200% auto;
+  animation: orionFlareMove 8s linear infinite;
+}
+
+/* Tema claro — flare mais translúcido */
+body.light header::after {
+  background: linear-gradient(90deg,
+    rgba(162,102,255,0.0) 0%,
+    rgba(162,102,255,0.3) 20%,
+    rgba(0,135,255,0.35) 50%,
+    rgba(162,102,255,0.3) 80%,
+    rgba(0,135,255,0.0) 100%);
+  filter: blur(10px) saturate(120%);
+}
+
+/* === Orion Header – Partículas Cósmicas (sob o flare) === */
+header {
+  position: relative;
+  z-index: 10;
+  overflow: visible;
+}
+
+/* Partículas: faixa de micropontos com drift horizontal e leve bob */
+header::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: calc(100% + 2px);      /* logo abaixo do header */
+  width: 100%;
+  height: 26px;               /* altura da faixa de partículas */
+  pointer-events: none;
+  opacity: 0;                 /* aparece ao rolar (classe .scrolled) */
+  filter: saturate(140%);
+  /* múltiplas camadas de radial-gradients para profundidade */
+  background:
+    radial-gradient(circle, rgba(255,255,255,0.55) 0 2px, transparent 2.6px) 12% 50% / 120px 26px repeat-x,
+    radial-gradient(circle, rgba(138,43,226,0.38) 0 1.6px, transparent 2.6px) 42% 50% / 160px 26px repeat-x,
+    radial-gradient(circle, rgba(47,123,255,0.38) 0 1.6px, transparent 2.6px) 72% 50% / 200px 26px repeat-x;
+  /* fade inferior para desaparecer no conteúdo */
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0));
+          mask-image: linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0));
+  animation: orionDust 18s linear infinite, orionBob 6s ease-in-out infinite;
+  will-change: transform, background-position;
+  z-index: 0;                 /* abaixo do ::after (flare) e acima do fundo */
+}
+
+/* Ativa ao rolar (mesma classe usada no flare) */
+body.scrolled header::before {
+  opacity: 0.9;
+}
+
+/* Tema claro: partículas mais translúcidas para não “pesar” */
+body.light header::before {
+  background:
+    radial-gradient(circle, rgba(255,255,255,0.45) 0 2px, transparent 2.6px) 12% 50% / 120px 26px repeat-x,
+    radial-gradient(circle, rgba(162,102,255,0.28) 0 1.6px, transparent 2.6px) 42% 50% / 160px 26px repeat-x,
+    radial-gradient(circle, rgba(0,135,255,0.28) 0 1.6px, transparent 2.6px) 72% 50% / 200px 26px repeat-x;
+  opacity: 0.7;
+}
+
+/* Animações */
+@keyframes orionDust {
+  from { background-position:   0   50%,   0   50%,   0   50%; }
+  to   { background-position:  600px 50%, -600px 50%, 300px 50%; }
+}
+@keyframes orionBob {
+  0%,100% { transform: translateY(0); }
+  50%     { transform: translateY(1px); }
+}
+
+/* Acessibilidade: reduz movimento se o usuário preferir */
+@media (prefers-reduced-motion: reduce) {
+  header::before,
+  header::after {
+    animation: none !important;
+  }
+}
+
+header::before,
+header::after {
+  pointer-events: none !important;
+  user-select: none !important;
+}
+
+/* Pausa/oculta o flare e as partículas quando o chat está ativo */
+body.chat-active header::before,
+body.chat-active header::after {
+  opacity: 0 !important;
+  animation-play-state: paused !important;
+  transition: opacity .25s ease !important;
+  pointer-events: none !important;
+  user-select: none !important;
+}
+
+/* === Light Mode: partículas mais nítidas e contrastadas === */
+body.light header::before{
+  /* +visíveis em repouso */
+  opacity: 0.85;                 /* antes ~0.7 */
+  height: 28px;                  /* um pouco mais alto para respirar */
+  filter: saturate(130%) drop-shadow(0 1px 2px rgba(0,0,0,0.08));
+  /* pontos um pouco maiores e com alfa maior */
+  background:
+    radial-gradient(circle, rgba(255,255,255,0.70) 0 2.2px, transparent 2.8px) 12% 50% / 120px 28px repeat-x,
+    radial-gradient(circle, rgba(162,102,255,0.45) 0 1.9px, transparent 2.8px) 42% 50% / 160px 28px repeat-x,
+    radial-gradient(circle, rgba(0,135,255,0.40) 0 1.9px, transparent 2.8px) 72% 50% / 200px 28px repeat-x;
+  /* fade mais suave para não “sumir” rápido no conteúdo */
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.95), rgba(0,0,0,0.15));
+          mask-image: linear-gradient(to bottom, rgba(0,0,0,0.95), rgba(0,0,0,0.15));
+  z-index: 0; /* fica sob o flare */
+}
+
+/* Quando rolar (classe .scrolled), dá um boost sutil */
+body.light.scrolled header::before{
+  opacity: 1;
+  filter: saturate(140%) drop-shadow(0 1px 2px rgba(0,0,0,0.10));
+}
+
+/* Garante que o flare fique acima das partículas */
+header::after{ z-index: 1; }
+header::before{ z-index: 0; }
+
+/* (opcional) deixa o flare um tiquinho mais presente no light */
+body.light header::after{
+  filter: blur(10px) saturate(135%);
+  opacity: 0.95;
+}
+
+/* === Corrige comportamento no topo (tema claro) === */
+
+/* estado padrão: invisível no topo */
+body:not(.scrolled).light header::before {
+  opacity: 0 !important;
+  transition: opacity 0.6s ease !important;
+}
+
+/* quando rolar, aparece normalmente */
+body.light.scrolled header::before {
+  opacity: 0.95 !important;
+  transition: opacity 0.8s ease !important;
+}
+
+/* === Orion Header Light Mode — Sincroniza flare e partículas === */
+
+/* estado padrão (topo da página): tudo oculto */
+body.light:not(.scrolled) header::before,
+body.light:not(.scrolled) header::after {
+  opacity: 0 !important;
+  transform: translateY(-6px);
+  transition: opacity 0.6s ease, transform 0.6s ease !important;
+}
+
+/* ao rolar (classe .scrolled): flare e partículas aparecem */
+body.light.scrolled header::before,
+body.light.scrolled header::after {
+  opacity: 0.95 !important;
+  transform: translateY(0);
+  transition: opacity 0.8s ease, transform 0.8s ease !important;
+}
+
+/* reforço para evitar conflitos entre animações */
+body.light header::after {
+  animation: orionFlareMove 8s linear infinite;
+  background-size: 200% auto;
+  will-change: background-position, opacity, transform;
+  z-index: 1;
+}
+
+/* === Aurora inicial Orion (boas-vindas ao carregar a página) === */
+body:not(.scrolled)::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  z-index: 9999;
+  background: linear-gradient(90deg,
+    rgba(138,43,226,0) 0%,
+    rgba(138,43,226,0.45) 20%,
+    rgba(47,123,255,0.6) 50%,
+    rgba(138,43,226,0.45) 80%,
+    rgba(47,123,255,0) 100%);
+  filter: blur(12px) saturate(140%);
+  opacity: 0;
+  pointer-events: none;
+  animation: orionWelcomeGlow 1.6s ease-out forwards;
+}
+
+/* Animação de entrada */
+@keyframes orionWelcomeGlow {
+  0%   { opacity: 0; transform: translateY(-8px); }
+  20%  { opacity: 1; transform: translateY(0); }
+  80%  { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-8px); }
+}
+
+
+:root{
+  /* Gradiente Orion */
+  --orion-g1: #6a00ff;
+  --orion-g2: #00d1ff;
+
+  /* Cores texto/borda por tema */
+  --cta-text: #ffffff;
+  --cta-border: rgba(255,255,255,.28);
+  --cta-shadow: 0 6px 24px rgba(64, 0, 255, .35);
+
+  /* Frosted */
+  --cta-bg: linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+  --cta-blur: 14px;
+}
+
+/* Tema claro – reforça contraste e borda */
+body.light :root,
+:rootbody.light{
+  --cta-text: #0b0f1a;
+  --cta-border: rgba(10, 15, 26, .12);
+  --cta-shadow: 0 6px 22px rgba(20, 40, 120, .18);
+  --cta-bg: linear-gradient(135deg, rgba(255,255,255,.65), rgba(255,255,255,.45));
+}
+
+.cta-orion{
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 50;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 12px 18px;
+  border-radius: 999px;
+
+  /* Frosted + gradiente de borda interna */
+  background: var(--cta-bg);
+  -webkit-backdrop-filter: blur(var(--cta-blur));
+  backdrop-filter: blur(var(--cta-blur));
+  border: 1px solid var(--cta-border);
+  box-shadow: var(--cta-shadow);
+
+  color: var(--cta-text);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: .2px;
+
+  cursor: pointer;
+  user-select: none;
+  transform: translateZ(0);
+  transition: transform .18s ease, box-shadow .28s ease, opacity .25s ease;
+}
+
+/* Cápsula de energia (gradiente interno sutil) */
+.cta-orion::before{
+  content:"";
+  position:absolute; inset:0;
+  border-radius: inherit;
+  pointer-events:none;
+  background: linear-gradient(90deg, var(--orion-g1), var(--orion-g2));
+  opacity:.32;                 /* base levemente menor */
+  mix-blend-mode: soft-light;
+  transition: opacity .25s ease; /* permite “respirar” no hover */
+}
+
+/* HOVER: só movimento leve + sombra + cápsula um pouco mais visível */
+.cta-orion:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 10px 32px rgba(80, 0, 255, .32), 0 2px 10px rgba(0, 200, 255, .18);
+}
+.cta-orion:hover::before{
+  opacity:.40;                 /* ganho sutil no brilho interno */
+}
+
+/* Press */
+.cta-orion:active{
+  transform: translateY(0);
+}
+
+/* Acessibilidade foco */
+.cta-orion:focus-visible{
+  outline: 2px solid #00d1ff;
+  outline-offset: 3px;
+}
+
+/* Conteúdo interno */
+.cta-ico{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width: 28px; height: 28px;
+  border-radius: 999px;
+  background: radial-gradient(120% 120% at 30% 20%, rgba(255,255,255,.30), rgba(255,255,255,.05) 50%, rgba(255,255,255,0) 70%);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.12);
+}
+
+/* Se usar imagem externa como logo */
+.cta-ico .ico-img{
+  display:block;
+  width:18px; height:18px;
+  image-rendering: -webkit-optimize-contrast;
+  filter: drop-shadow(0 0 4px rgba(255,255,255,.14));
+}
+
+/* (se ainda houver SVG inline em algum lugar) */
+.cta-ico .ico-mark{
+  display:block;
+  width:18px; height:18px;
+}
+
+.cta-label{
+  white-space: nowrap;
+  font-size: 14px;
+}
+
+/* Preferência de movimento reduzido */
+@media (prefers-reduced-motion: reduce){
+  .cta-orion, .cta-orion::before{
+    transition: none !important;
+  }
+}
+
+/* Esconder quando o chat estiver aberto (ajuste se já existir classe/estado) */
+.body-has-chat-open .cta-orion,
+.chat-open .cta-orion{
+  opacity:0; pointer-events:none; transform: translateY(6px);
+}
+
+/* Responsivo – aproxima em telas menores */
+@media (max-width:480px){
+  .cta-orion{ right:14px; bottom:14px; padding:11px 16px; }
+  .cta-ico{ width:26px; height:26px; }
+  .cta-ico .ico-mark, .cta-ico .ico-img{ width:16px; height:16px; }
+  .cta-label{ font-size:13px; }
+}
+
+.cta-ico .ico-img{
+  display:block;
+  width:18px; height:18px;
+  image-rendering: -webkit-optimize-contrast;
+  filter: drop-shadow(0 0 4px rgba(255,255,255,.14));
+}
+
+/* Garante logo redonda e centralizada */
+.cta-ico {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;           /* <- força formato circular */
+  overflow: hidden;             /* <- corta bordas quadradas da imagem */
+  background: radial-gradient(
+    120% 120% at 30% 20%,
+    rgba(255,255,255,.25),
+    rgba(255,255,255,.04) 50%,
+    rgba(255,255,255,0) 70%
+  );
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.12);
+}
+
+/* Imagem dentro do ícone: cobre o círculo e mantém nitidez */
+.cta-ico .ico-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;            /* preenche todo o círculo */
+  border-radius: 50%;           /* reforça arredondamento */
+  filter: drop-shadow(0 0 4px rgba(255,255,255,.12));
+  image-rendering: -webkit-optimize-contrast;
+}
+
+.cta-orion.cta--mini{
+  padding:10px; gap:0; width:44px; height:44px; border-radius:50%; justify-content:center;
+}
+.cta-orion.cta--mini .cta-label{ display:none; }
+
+/* ===== Tooltip Orion (aparece apenas no modo mini) ===== */
+
+.cta-tooltip{
+  position: absolute;
+  bottom: 60px;               /* distância acima do botão */
+  right: 50%;
+  transform: translateX(50%) scale(.9);
+  background: rgba(20,20,40,.88);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: .2px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .25s ease, transform .25s ease;
+  box-shadow: 0 6px 20px rgba(0,0,0,.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Triângulo inferior */
+.cta-tooltip::after{
+  content: "";
+  position: absolute;
+  bottom: -5px; left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: rgba(20,20,40,.88);
+}
+
+/* Mostrar tooltip somente no modo mini */
+.cta-orion.cta--mini:hover .cta-tooltip{
+  opacity: 1;
+  transform: translateX(50%) scale(1);
+}
+
+/* Tema claro (tooltip mais escuro para contraste) */
+body.light .cta-tooltip{
+  background: rgba(255,255,255,.95);
+  color: #0b0f1a;
+  box-shadow: 0 4px 20px rgba(0,0,0,.15);
+}
+body.light .cta-tooltip::after{
+  border-top-color: rgba(255,255,255,.95);
+}
+
+/* ===== Animação suave ao abrir/fechar chat ===== */
+
+/* estado inicial */
+.cta-orion{
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity .35s ease, transform .35s ease;
+}
+
+/* quando o chat abre */
+.chat-open .cta-orion{
+  opacity: 0;
+  transform: translateY(8px) scale(.95);
+  pointer-events: none;
+}
+
+/* quando o chat fecha, volta com fade */
+html:not(.chat-open) .cta-orion{
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* -------- Pulso de presença (mini + chat fechado) -------- */
+
+/* permite posicionar o halo atrás da logo */
+.cta-ico{ position: relative; }
+
+/* halo que expande e some suavemente */
+.cta-ico::after{
+  content:"";
+  position:absolute; inset:0;
+  border-radius:50%;
+  pointer-events:none;
+  background: radial-gradient(circle,
+    rgba(255,255,255,.35) 0%,
+    rgba(255,255,255,.18) 32%,
+    rgba(255,255,255,0) 70%);
+  opacity:0;
+  transform: scale(.9);
+}
+
+/* keyframes do halo */
+@keyframes orionHalo {
+  0%   { opacity:0;   transform: scale(.88); }
+  45%  { opacity:.38; transform: scale(1.06); }
+  100% { opacity:0;   transform: scale(1.22); }
+}
+
+/* micro-respiração da sombra do botão */
+@keyframes orionBreath {
+  0%   { box-shadow: 0 6px 22px rgba(64,0,255,.25); }
+  50%  { box-shadow: 0 9px 28px rgba(64,0,255,.32); }
+  100% { box-shadow: 0 6px 22px rgba(64,0,255,.25); }
+}
+
+/* ativa o pulso apenas quando estiver mini e chat fechado */
+html:not(.chat-open) .cta-orion.cta--mini .cta-ico::after{
+  animation: orionHalo 2.8s ease-out infinite;
+}
+
+/* respiração na cápsula (sombra) — bem sutil */
+html:not(.chat-open) .cta-orion.cta--mini{
+  animation: orionBreath 3.2s ease-in-out infinite;
+}
+
+/* pausa ao interagir */
+.cta-orion:hover .cta-ico::after,
+.cta-orion:focus-visible .cta-ico::after,
+.cta-orion:hover,
+.cta-orion:focus-visible{
+  animation-play-state: paused;
+}
+
+/* acessibilidade: respeita preferência por menos movimento */
+@media (prefers-reduced-motion: reduce){
+  html:not(.chat-open) .cta-orion.cta--mini .cta-ico::after{ animation: none !important; opacity:0; }
+  html:not(.chat-open) .cta-orion.cta--mini{ animation: none !important; }
+}
+
+
+/* ========== UNIFICAÇÃO DO CTA ENTRE TEMAS ========== */
+
+/* Tema escuro (mantém base atual) */
+:root {
+  --orion-g1: #6a00ff;
+  --orion-g2: #00d1ff;
+
+  --cta-text: #ffffff;
+  --cta-border: rgba(255,255,255,.28);
+  --cta-shadow: 0 8px 26px rgba(64, 0, 255, .35);
+  --cta-bg: linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+  --cta-blur: 14px;
+  --cta-before: .40;
+  --halo-peak: .32;
+}
+
+/* Tema claro — usa as MESMAS cores do escuro para manter identidade */
+:rootbody.light,
+body.light :root {
+  --orion-g1: #6a00ff;
+  --orion-g2: #00d1ff;
+
+  --cta-text: #ffffff; /* mantém branco */
+  --cta-border: rgba(255,255,255,.28);
+  --cta-shadow: 0 8px 26px rgba(64, 0, 255, .35);
+  --cta-bg: linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+  --cta-blur: 14px;
+  --cta-before: .40;
+  --halo-peak: .32;
+}
+
+/* Garante que o botão fique legível sobre fundos claros */
+body.light .cta-orion {
+  mix-blend-mode: normal;
+  color: var(--cta-text);
+}
+
+/* Mantém a mesma aparência da logo nos dois temas */
+body.light .cta-ico .ico-img {
+  filter: drop-shadow(0 0 4px rgba(255,255,255,.18));
+}
+
+
+/* ===== FIX: CTA idêntico no tema claro (sem “máscara branca”) ===== */
+body.light .cta-orion{
+  /* tira o efeito de vidro que “lava” a cor no claro */
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  /* aplica o mesmo recheio do dark como sólido */
+  background: linear-gradient(135deg, #6a00ff 0%, #00d1ff 100%) !important;
+  border-color: rgba(255,255,255,.28) !important;
+  box-shadow: 0 8px 26px rgba(64, 0, 255, .35) !important;
+  color: #fff !important;
+}
+
+/* desliga a camada de mistura que clareia no claro */
+body.light .cta-orion::before{
+  content: none !important;   /* remove o overlay soft-light */
+}
+
+/* mantém a logo com brilho discreto (sem “lavar”) */
+body.light .cta-ico .ico-img{
+  filter: drop-shadow(0 0 3px rgba(255,255,255,.15)) !important;
+}
+
+/* Hover/press no tema claro — mesmo movimento do dark */
+body.light .cta-orion{
+  transition: transform .18s ease, box-shadow .28s ease, opacity .25s ease !important;
+}
+
+body.light .cta-orion:hover{
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 32px rgba(80, 0, 255, .32), 0 2px 10px rgba(0, 200, 255, .18) !important;
+}
+
+body.light .cta-orion:active{
+  transform: translateY(0) !important;
+}
+
+/* se usar modo mini, mantém o mesmo lift */
+body.light .cta-orion.cta--mini:hover{
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 26px rgba(80, 0, 255, .30), 0 2px 8px rgba(0, 200, 255, .20) !important;
+}
+
+/* === Movimento uniforme nos dois temas === */
+
+/* Remove flare e mantém apenas o lift e sombra */
+.cta-orion::after,
+.cta-orion::before {
+  content: none !important;
+}
+
+/* Animação de hover idêntica */
+.cta-orion,
+body.light .cta-orion {
+  transition: transform .18s ease, box-shadow .28s ease, opacity .25s ease !important;
+}
+
+/* Hover lift */
+.cta-orion:hover,
+body.light .cta-orion:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 32px rgba(80, 0, 255, .32), 0 2px 10px rgba(0, 200, 255, .18) !important;
+}
+
+/* Press */
+.cta-orion:active,
+body.light .cta-orion:active {
+  transform: translateY(0) !important;
+}
+
+/* Mini igual */
+.cta-orion.cta--mini:hover,
+body.light .cta-orion.cta--mini:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 26px rgba(80, 0, 255, .30), 0 2px 8px rgba(0, 200, 255, .20) !important;
+}
+
+/* === COR FINAL DO CTA – igual à seta do campo de busca === */
+.cta-orion {
+  background: linear-gradient(135deg, #6a00ff 0%, #00d1ff 100%) !important;
+  border: none !important;
+  box-shadow: 0 8px 26px rgba(64, 0, 255, .35) !important;
+  color: #fff !important;
+}
+
+/* mantém mesmo gradiente no tema claro */
+body.light .cta-orion {
+  background: linear-gradient(135deg, #6a00ff 0%, #00d1ff 100%) !important;
+}
+
+/* pequeno glow de coerência com o botão de envio */
+.cta-orion:hover,
+body.light .cta-orion:hover {
+  box-shadow: 0 0 12px rgba(0, 209, 255, .35),
+              0 0 24px rgba(106, 0, 255, .35) !important;
+}
+
+/* === Gradiente escurecido — Orion Deep Mode === */
+.cta-orion,
+body.light .cta-orion {
+  background: linear-gradient(135deg, #4a00c8 0%, #0090cc 100%) !important; /* tons mais profundos */
+  border: 1px solid rgba(255,255,255,.18) !important;
+  box-shadow: 0 8px 22px rgba(64, 0, 255, .25),
+              0 2px 10px rgba(0, 200, 255, .12) !important;
+  color: #fff !important;
+}
+
+/* Hover suave — brilho controlado */
+.cta-orion:hover,
+body.light .cta-orion:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 28px rgba(80, 0, 255, .28),
+              0 2px 10px rgba(0, 200, 255, .16) !important;
+}
+
+/* Press (volta ao normal) */
+.cta-orion:active,
+body.light .cta-orion:active {
+  transform: translateY(0) !important;
+}
+
+/* Animação suave da frase Orion */
+#orion-text {
+  display:inline-block;
+  transition:opacity .6s ease, transform .6s ease;
+}
+
+.fade-out {
+  opacity:0;
+  transform:translateY(6px);
+}
+
+.fade-in {
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* Gradiente na palavra Orion */
+.orion-gradient {
+  background: linear-gradient(90deg, #4015c9 0%, #7b4dfb 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+/* === Gradiente fixo === */
+.orion-gradient {
+  background: linear-gradient(90deg, #4015c9 0%, #7b4dfb 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+/* === Gradiente animado (brilho) === */
+.orion-gradient-animated {
+  background: linear-gradient(90deg, #4015c9, #7b4dfb, #4015c9);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  animation: shineGradient 5s linear infinite;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+@keyframes shineGradient {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* === Ritmo individual === */
+.orion-gradient-animated.orion-delay-1 {
+  animation-delay: 0s;
+}
+
+.orion-gradient-animated.orion-delay-2 {
+  animation-delay: 1.5s;
+}
+
+.orion-gradient-animated.orion-delay-3 {
+  animation-delay: 3s;
+}
+
+/* === Suaviza o movimento do container da frase === */
+.orion-identity {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 56px; /* altura base p/ evitar salto */
+  transition: min-height .4s ease, margin-bottom .4s ease;
+}
+
+/* ajusta no mobile se quiser menor */
+@media (max-width:600px){
+  .orion-identity{
+    min-height: 64px;
+  }
+}
+
+/* transição sutil na caixa de busca ao realinhar */
+.hero .input {
+  transition: transform .4s ease, margin-top .4s ease;
+}
+
+
+/* Orion — Respiração de Luz (sem nós extras) */
+:root{
+  --orion-fade-dur: 560ms;
+  --orion-fade-ease: cubic-bezier(.22,.61,.36,1);
+  --orion-blur-max: 1px;
+  --orion-lift: 2px;
+}
+
+@media (max-width: 480px){
+  :root{ --orion-blur-max: 0.7px; }
+}
+
+.orion-identity{
+  position: relative;
+  min-height: var(--orion-identity-minh, 3.2rem);
+  will-change: filter, opacity, transform;
+}
+
+#orion-text{
+  display: inline-block;
+  will-change: opacity, filter, transform;
+}
+
+/* animações chave com pico de blur no meio */
+@keyframes orionBreathIn {
+  0%   { opacity: 0; filter: blur(0); transform: translateY(var(--orion-lift)); }
+  45%  { opacity: 1; filter: blur(var(--orion-blur-max)); transform: translateY(0); }
+  100% { opacity: 1; filter: blur(0); transform: translateY(0); }
+}
+
+@keyframes orionBreathOut {
+  0%   { opacity: 1; filter: blur(0); transform: translateY(0); }
+  55%  { opacity: 0; filter: blur(var(--orion-blur-max)); transform: translateY(calc(var(--orion-lift) * -1)); }
+  100% { opacity: 0; filter: blur(0); transform: translateY(calc(var(--orion-lift) * -1)); }
+}
+
+/* classes aplicadas no #orion-text */
+#orion-text.is-entering{
+  animation: orionBreathIn var(--orion-fade-dur) var(--orion-fade-ease) both;
+}
+#orion-text.is-leaving{
+  animation: orionBreathOut var(--orion-fade-dur) var(--orion-fade-ease) both;
+}
+
+@media (prefers-reduced-motion: reduce){
+  :root{ --orion-fade-dur: 1ms; }
+  #orion-text{ animation: none !important; filter: none !important; transform: none !important; }
+}
+
