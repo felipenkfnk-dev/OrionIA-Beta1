@@ -7,8 +7,9 @@
 html,body{height:100%}
 body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;margin:0;color:var(--text);
   transition:background var(--transition), color var(--transition);
-  background: radial-gradient(1200px 800px at 75% -10%, rgba(0,91,255,.25), transparent 60%),
-              radial-gradient(900px 700px at -10% 20%, rgba(108,0,255,.25), transparent 60%),
+  background: radial-gradient(1200px 800px at 75% -10%, rgba(124,77,255,.28), transparent 60%),
+              radial-gradient(900px 700px at -10% 20%, rgba(59,27,255,.24), transparent 60%),
+              linear-gradient(160deg, rgba(59,27,255,.22) 0%, rgba(124,77,255,.35) 55%, transparent 100%),
               var(--bg);
   background-attachment:fixed;
 }
@@ -27,12 +28,37 @@ header{display:flex;align-items:center;justify-content:space-between;gap:16px;ma
 .btn:hover{transform:translateY(-1px);border-color:rgba(255,255,255,.22)}
 .btn.primary{background:linear-gradient(135deg, var(--a), var(--b));border:none;color:#fff;box-shadow:0 10px 30px rgba(0,91,255,.22)}
 
+/* Orion v3.5.1 — micro animações e foco acessível */
+.o-btn,
+.hero button,
+.chips button,
+.btn,
+.send,
+.theme-pill{transition:background-color .25s ease,color .25s ease,transform .25s ease,box-shadow .25s ease,opacity .25s ease}
+
+.o-btn:focus-visible,
+.hero button:focus-visible,
+.chips button:focus-visible,
+.btn:focus-visible,
+.send:focus-visible,
+.theme-pill:focus-visible{outline:0;box-shadow:0 0 0 3px rgba(124,77,255,.45),0 14px 32px rgba(59,27,255,.22);border-color:rgba(124,77,255,.65)}
+
+.o-btn:hover,
+.hero button:hover,
+.btn:hover,
+.send:hover,
+.theme-pill:hover{box-shadow:inset 0 0 0 1px rgba(255,255,255,.2),0 16px 36px rgba(124,77,255,.24)}
+
+.chips button{color:var(--text);transition:background-color .25s ease,color .25s ease,box-shadow .25s ease,transform .25s ease}
+
+.chips button:hover{box-shadow:inset 0 0 0 1px rgba(124,77,255,.4),0 10px 28px rgba(59,27,255,.18)}
+
 /* Discreet theme toggle (gradient pill) without icons */
 .theme-pill{
   width:44px;height:28px;border-radius:999px;border:1px solid var(--hair);
   background:linear-gradient(135deg, var(--a), var(--b));
   position:relative; cursor:pointer; display:inline-flex; align-items:center; padding:2px;
-  box-shadow:0 6px 18px rgba(0,91,255,.22); transition:transform .15s ease, opacity .2s ease;
+  box-shadow:0 6px 18px rgba(0,91,255,.22); transition:transform .25s ease, opacity .25s ease, box-shadow .25s ease, background .25s ease;
 }
 .theme-pill:hover{ transform:translateY(-1px); }
 .theme-thumb{
