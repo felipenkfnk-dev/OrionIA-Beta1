@@ -357,163 +357,10 @@ body.light .chips .chip:hover {
   border-color: rgba(0,0,0,0.15) !important;
 }
 
-/* para chips PRO (mantém contraste no gradiente) */
-.chips .chip.is-pro:hover::after {
+/* para chips premium (mantém contraste no gradiente) */
+.chips .chip.chip--premium:hover::after {
   filter: brightness(1.1);
 }
-
-/* ===== Orion v3.5.0c — Selo 👑 nos botões PRO ===== */
-.chips .chip.is-pro {
-  position: relative;
-  overflow: visible;
-}
-
-/* Cria o selo com coroa dourada */
-.chips .chip.is-pro::after {
-  content: "👑";
-  position: absolute;
-  top: -6px;
-  right: -4px;
-  font-size: 12px;
-  line-height: 1;
-  filter: drop-shadow(0 1px 2px rgba(0,0,0,.3));
-  pointer-events: none;
-  transition: transform .25s ease;
-}
-
-/* Efeito suave no hover */
-.chips .chip.is-pro:hover::after {
-  transform: scale(1.15);
-}
-
-
-/* ===== Orion v3.5.0d — Shine da coroa PRO (hover) ===== */
-.chips .chip.is-pro{
-  position: relative;
-  overflow: visible;
-}
-
-/* Coroa (já existente) */
-.chips .chip.is-pro::after{
-  content: "👑";
-  position: absolute;
-  top: -6px;
-  right: -4px;
-  font-size: 12px;
-  line-height: 1;
-  filter: drop-shadow(0 1px 2px rgba(0,0,0,.30));
-  transition: transform .25s ease;
-}
-
-/* Reflexo (flare) — criado por baixo da coroa */
-.chips .chip.is-pro::before{
-  content: "";
-  position: absolute;
-  top: -10px;
-  right: -8px;
-  width: 18px;
-  height: 18px;
-  pointer-events: none;
-  background: radial-gradient(closest-side,
-              rgba(255,223,100,.90),
-              rgba(255,223,100,.35) 40%,
-              rgba(255,223,100,0) 70%);
-  border-radius: 50%;
-  opacity: 0;
-  transform: translateX(-8px) scale(.6);
-  filter: blur(.5px);
-}
-
-/* Hover: leve zoom na coroa + animação de glow e varredura */
-.chips .chip.is-pro:hover::after{
-  transform: scale(1.15);
-  animation: orion-crown-glow 1200ms ease-out 1;
-}
-.chips .chip.is-pro:hover::before{
-  animation: orion-crown-sweep 900ms ease-out 1;
-}
-
-/* Tema claro: tornar o rastro (movimento) mais escuro/visível */
-body.light .chips .chip.is-pro::before {
-  /* deixa o rastro mais “encorpado” no claro */
-  opacity: .75;                         /* antes ~.45–.55 */
-  filter: drop-shadow(0 0 4px rgba(255, 160, 0, .35));
-  mix-blend-mode: multiply;             /* escurece sobre fundo claro */
-
-  /* rastro mais escuro e definido */
-  background: linear-gradient(
-    90deg,
-    rgba(0,0,0,0) 0%,
-    rgba(255, 170, 0, .45) 35%,
-    rgba(0,0,0,0) 70%
-  );
-  /* não redefina animation aqui para não matar o movimento do hover */
-}
-
-/* Opcional: no hover, só reforça um pouco sem estourar */
-body.light .chips .chip.is-pro:hover::before {
-  opacity: .9;
-}
-
-
-/* Glow pulsante suave */
-@keyframes orion-crown-glow{
-  0%   { text-shadow: 0 0 0 rgba(255,215,0,0), 0 0 0 rgba(255,215,0,0); }
-  30%  { text-shadow: 0 0 2px rgba(255,215,0,.70), 0 0 6px rgba(255,215,0,.60); }
-  60%  { text-shadow: 0 0 3px rgba(255,215,0,.90), 0 0 10px rgba(255,215,0,.70); }
-  100% { text-shadow: 0 0 0 rgba(255,215,0,0), 0 0 0 rgba(255,215,0,0); }
-}
-
-/* Varredura do reflexo (da esquerda pra direita) */
-@keyframes orion-crown-sweep{
-  0%   { opacity:0; transform: translateX(-10px) scale(.5); }
-  25%  { opacity:.9; }
-  60%  { opacity:.6; transform: translateX(10px) scale(1); }
-  100% { opacity:0; transform: translateX(16px) scale(1.1); }
-}
-
-/* Acessibilidade: respeita usuários que preferem menos movimento */
-@media (prefers-reduced-motion: reduce){
-  .chips .chip.is-pro:hover::after,
-  .chips .chip.is-pro:hover::before{ animation: none !important; }
-}
-
-/* === Tokens de cor === */
-:root{
-  --crown-dark:  #FFD54F;
-  --crown-light: #FFC107;
-  --crown-sweep-light: rgba(255,170,0,.45);
-  --crown-sweep-shadow: rgba(255,160,0,.35);
-}
-
-/* Brilho estático (coroa) – tema claro */
-body.light .chips .chip.is-pro::after{
-  background: radial-gradient(closest-side,
-    color-mix(in srgb, var(--crown-light) 90%, transparent) 40%,
-    color-mix(in srgb, var(--crown-light) 40%, transparent) 60%,
-    transparent 80%
-  );
-  filter: drop-shadow(0 0 6px rgba(255,193,7,.8)) brightness(1.3);
-}
-
-/* Rastro em movimento (sweep) – tema claro, mais escuro/visível */
-body.light .chips .chip.is-pro::before{
-  opacity: .75;
-  background: linear-gradient(90deg, transparent 0%, var(--crown-sweep-light) 35%, transparent 70%);
-  filter: drop-shadow(0 0 4px var(--crown-sweep-shadow));
-  mix-blend-mode: multiply; /* dá corpo no fundo claro */
-}
-
-/* Mantém o tema escuro como estava */
-body.dark .chips .chip.is-pro::after{
-  background: radial-gradient(closest-side,
-    color-mix(in srgb, var(--crown-dark) 90%, transparent) 40%,
-    color-mix(in srgb, var(--crown-dark) 40%, transparent) 60%,
-    transparent 80%
-  );
-  filter: drop-shadow(0 0 6px rgba(255,215,0,.9));
-}
-
 
 /* Focus visível por teclado nos chips (desktop e geral) */
 .chips .chip:focus-visible{
@@ -533,12 +380,14 @@ body.dark .chips .chip.is-pro::after{
 /* Respeita quem prefere menos movimento */
 @media (prefers-reduced-motion: reduce){
   .chips .chip,
-  .chips .chip:hover,
-  .chips .chip.is-pro:hover::before,
-  .chips .chip.is-pro:hover::after{
+  .chips .chip:hover{
+    transition: none !important;
+    transform: none !important;
+  }
+  .chips .chip.chip--premium::before,
+  .chips .chip.chip--premium::after{
     transition: none !important;
     animation: none !important;
-    transform: none !important;
   }
 }
 
