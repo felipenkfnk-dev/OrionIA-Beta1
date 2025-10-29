@@ -91,14 +91,19 @@
       submitPrompt();
     }
   });
-  sendBtn.addEventListener('click
-  try { orionUncenterOnce(); } catch(e) {}
-', submitPrompt);
+  sendBtn.addEventListener('click', ()=>{
+    try { orionUncenterOnce(); } catch(e) {}
+    submitPrompt();
+  });
 
   // Quick fills
   document.querySelectorAll('.chip').forEach(ch=> ch.addEventListener('click', ()=>{
     input.value = ch.getAttribute('data-suggest');
-    input.focus();
+    try { input.focus({preventScroll:true}); } catch(e) { input.focus(); }
+    if(typeof input.setSelectionRange === 'function'){
+      input.setSelectionRange(input.value.length, input.value.length);
+    }
+    try { orionUncenterOnce(); } catch(e) {}
   }));
 
   // CTA
