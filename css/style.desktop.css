@@ -1182,4 +1182,33 @@ body.light .cta-orion:active {
   transition: transform .4s ease, margin-top .4s ease;
 }
 
+:root {
+  --hero-max: 980px; /* mesmo valor usado nos chips */
+}
+
+/* containers do hero centralizados com a mesma largura */
+.hero,
+.hero .hero-inner,
+.hero .search-wrap,
+.hero .chips-grid {
+  max-width: var(--hero-max);
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+/* caixa da busca */
+.search-wrap { width: 100%; }
+
+/* input e “botão seta” expandem corretamente */
+.search-input,
+.search-box,
+.search-bar,
+.search { width: 100%; }
+
+/* se existir largura fixa anterior, sobrescreve */
+.search-input,
+.search-box,
+.search-bar { max-width: 100% !important; }
+
 
