@@ -70,9 +70,8 @@
 
 /* Garantia do layout dos chips (mantém o visual original) */
 .main .intro .chips{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(260px, 1fr));
   gap: 12px;
 }
 
@@ -357,11 +356,6 @@ body.light .chips .chip:hover {
   border-color: rgba(0,0,0,0.15) !important;
 }
 
-/* para chips premium (mantém contraste no gradiente) */
-.chips .chip.chip--premium:hover::after {
-  filter: brightness(1.1);
-}
-
 /* Focus visível por teclado nos chips (desktop e geral) */
 .chips .chip:focus-visible{
   outline: none;
@@ -383,11 +377,6 @@ body.light .chips .chip:hover {
   .chips .chip:hover{
     transition: none !important;
     transform: none !important;
-  }
-  .chips .chip.chip--premium::before,
-  .chips .chip.chip--premium::after{
-    transition: none !important;
-    animation: none !important;
   }
 }
 
