@@ -664,3 +664,79 @@ html:not(.chat-open) .cta-orion.cta--mini{ animation: orionBreath 3.2s ease-in-o
 
 /* mobile base */
 @media (max-width:480px){ .cta-orion{ right:14px; bottom:14px; } }
+
+/* ===========================
+   🚑 HERO RESCUE PATCH (v3.5.6-b)
+   Restaura alinhamento, largura e espaçamentos
+   =========================== */
+
+:root {
+  --hero-max: 980px;
+  --hero-gap: 20px;
+}
+
+/* garante caixa consistente */
+.hero, .headline, .search-wrap, .chips-grid, .chip { box-sizing: border-box; }
+
+/* HERO como coluna centralizada */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--hero-gap);
+  padding: 64px 16px 48px; /* top / sides / bottom */
+  max-width: 100%;
+}
+
+/* HEADLINE central e contida */
+.headline {
+  max-width: var(--hero-max);
+  margin: 0 auto;
+  text-align: center;
+  line-height: 1.25;
+  font-weight: 700;
+}
+
+/* BUSCA alinhada à headline/chips */
+.search-wrap {
+  width: 100%;
+  max-width: var(--hero-max);
+  margin: 0 auto;
+}
+.search, .search-bar, .search-box, .search-input {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* GRID dos CHIPS — 2 colunas desktop, 1 no mobile */
+.chips-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 24px; /* row / column */
+  width: 100%;
+  max-width: var(--hero-max);
+  margin: 0 auto;
+}
+
+/* cada chip ocupa toda a célula e mantém visual */
+.chip {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: .78rem 1rem;
+}
+
+/* linha dupla para “Ver todas as ferramentas” */
+.chip.chip--full,
+.chips-grid .chip-full { grid-column: 1 / -1; }
+
+/* mobile: 1 coluna */
+@media (max-width: 768px) {
+  .chips-grid { grid-template-columns: 1fr; }
+}
+
+/* evita scroll lateral no hero */
+.hero { overflow-x: hidden; }
+
+
