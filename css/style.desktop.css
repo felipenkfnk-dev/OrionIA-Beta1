@@ -16,60 +16,22 @@
 }
 
 /* Conforto visual do input */
-.hero .search .input,
-.hero .search form {
+.hero-search .search-bar .input,
+.hero-search .search-bar form {
   max-width: 860px;
   margin: 0 auto;
 }
 
 /* Ajuste fino do respiro à direita do botão azul */
 @media (min-width: 1200px){
-  .hero .search input[type="text"],
-  .hero .search input[type="search"]{
+  .hero-search .search-bar input[type="text"],
+  .hero-search .search-bar input[type="search"]{
     padding-right: 72px;
   }
 }
 
-/* ===== Orion IA v3.4.9i — alinhamento do search + chips sem quebrar o flex ===== */
-@media (min-width:1200px){
-  :root{ --search-shift-x:-32px; } /* ajuste fino: -26px, -32px, -40px */
-
-  /* Desloca visualmente sem afetar o flow/flex */
-  .main .intro .search{
-    position: relative;
-    transform: translateX(var(--search-shift-x));
-    transition: transform .25s ease;
-    margin-left: 0 !important;
-    left: auto !important;
-    right: auto !important;
-  }
-
-  .main .intro .chips{
-    transform: translateX(var(--search-shift-x));
-    transition: transform .25s ease;
-    left: auto !important;
-    right: auto !important;
-    margin-left: 0 !important;
-  }
-
-  /* (opcional) microcompensação do botão azul */
-  /* .main .intro .search{
-       transform: translateX(calc(var(--search-shift-x) - 6px));
-     } */
-}
-
-/* Mobile/Tablet: tudo centralizado sem deslocamento */
-@media (max-width:1199.98px){
-  .main .intro .search,
-  .main .intro .chips{
-    transform: none !important;
-    left: auto !important;
-    margin-left: 0 !important;
-  }
-}
-
 /* Garantia do layout dos chips (mantém o visual original) */
-.main .intro .chips{
+.hero-chips .chip-grid{
   display: grid;
   grid-template-columns: repeat(2, minmax(260px, 1fr));
   gap: 12px;
@@ -339,63 +301,63 @@ body.light button#sendBtn:hover{ box-shadow:0 16px 30px rgba(0,0,0,.18); }
 /* ===== Orion v3.5.0b — Hover ajustado nos botões de ferramentas (chips) ===== */
 
 /* estilo base continua igual */
-.chips .chip {
+.chip-grid .chip {
   transition: all .25s ease;
 }
 
 /* hover no modo escuro */
-body.dark .chips .chip:hover {
+body.dark .chip-grid .chip:hover {
   background: rgba(255,255,255,0.15) !important;
   color: #fff !important;
 }
 
 /* hover no modo claro */
-body.light .chips .chip:hover {
+body.light .chip-grid .chip:hover {
   background: rgba(0,0,0,0.08) !important;
   color: #000 !important;
   border-color: rgba(0,0,0,0.15) !important;
 }
 
 /* Focus visível por teclado nos chips (desktop e geral) */
-.chips .chip:focus-visible{
+.chip-grid .chip:focus-visible{
   outline: none;
   box-shadow: 0 0 0 2px rgba(0,91,255,.25), 0 6px 18px rgba(0,0,0,.12);
 }
 
 /* Hover dos chips – sem “pulo” de layout */
-.chips .chip{
+.chip-grid .chip{
   transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
 }
-.chips .chip:hover{
+.chip-grid .chip:hover{
   transform: translateY(-1px);
   box-shadow: 0 8px 22px rgba(0,0,0,.10);
 }
 
 /* Respeita quem prefere menos movimento */
 @media (prefers-reduced-motion: reduce){
-  .chips .chip,
-  .chips .chip:hover{
+  .chip-grid .chip,
+  .chip-grid .chip:hover{
     transition: none !important;
     transform: none !important;
   }
 }
 
 /* === Ajuste de borda tracejada dos chips no tema claro === */
-body.light .chips .chip {
+body.light .chip-grid .chip {
   border: 1px dashed rgba(0, 0, 0, 0.18); /* antes estava ~0.08 */
   background-color: rgba(255, 255, 255, 0.6); /* leve preenchimento */
   backdrop-filter: blur(6px);
 }
 
 /* Mantém consistência no hover */
-body.light .chips .chip:hover {
+body.light .chip-grid .chip:hover {
   border-color: rgba(0, 0, 0, 0.28);
   background-color: rgba(255, 255, 255, 0.75);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 /* Tema escuro permanece igual */
-body.dark .chips .chip {
+body.dark .chip-grid .chip {
   border: 1px dashed rgba(255, 255, 255, 0.1);
 }
 

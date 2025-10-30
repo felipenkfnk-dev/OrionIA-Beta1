@@ -43,36 +43,45 @@
     </header>
 
     <main class="main" data-center-onload="true">
-      <section class="hero">
-        <h1 class="hero-headline" aria-live="polite">
-          Olá eu sou a Orion, uma IA criada para transformar ideias em negócios digitais reais.
-        </h1>
-        <div class="search" role="search" aria-label="Pergunte algo à Orion">
-          <div class="input">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M21 21l-4.2-4.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/></svg>
-            <input id="prompt" type="text" placeholder="Vamos criar o seu negócio digital?" autocomplete="off" />
-            <button id="sendBtn" class="send" aria-label="Enviar">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4 12h14M13 5l7 7-7 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </button>
+      <div class="intro">
+        <section class="hero">
+          <div class="hero-title">
+            <h1 class="hero-headline" aria-live="polite">
+              Olá eu sou a <span class="brand">Orion</span>, uma IA criada para transformar ideias em negócios digitais reais.
+            </h1>
           </div>
-        </div>
 
-        <div class="chips">
-          <button class="chip" data-suggest="Vamos criar o seu negócio digital?"><span class="chip__label">💡 Gerar Ideia de Negócio</span></button>
-          <button class="chip" data-suggest="Validar se minha ideia é viável"><span class="chip__label">🎯 Validar Nicho</span></button>
+          <div class="hero-search">
+            <div class="search search-bar" role="search" aria-label="Pergunte algo à Orion">
+              <div class="input">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M21 21l-4.2-4.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/></svg>
+                <input id="prompt" type="text" placeholder="Vamos criar o seu negócio digital?" autocomplete="off" />
+                <button id="sendBtn" class="send" aria-label="Enviar">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 12h14M13 5l7 7-7 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
 
-          <button class="chip" data-suggest="Analisar o mercado e concorrentes"><span class="chip__label">📊 Pesquisa de Mercado</span></button>
-          <button class="chip" data-suggest="Criar oferta e produto com a Orion IA"><span class="chip__label">💼 Criar Oferta e Produto</span></button>
+          <div class="hero-chips">
+            <div class="chip-grid">
+              <button class="chip" data-suggest="Vamos criar o seu negócio digital?"><span class="chip__label">💡 Gerar Ideia de Negócio</span></button>
+              <button class="chip" data-suggest="Validar se minha ideia é viável"><span class="chip__label">🎯 Validar Nicho</span></button>
 
-          <button class="chip" data-suggest="Gerar página de vendas automática"><span class="chip__label">🌐 Gerar Landing Page</span></button>
-          <button class="chip" data-suggest="Aprender a vender com a Orion IA"><span class="chip__label">⚡ Vender com a Orion</span></button>
+              <button class="chip" data-suggest="Analisar o mercado e concorrentes"><span class="chip__label">📊 Pesquisa de Mercado</span></button>
+              <button class="chip" data-suggest="Criar oferta e produto com a Orion IA"><span class="chip__label">💼 Criar Oferta e Produto</span></button>
 
-          <button class="chip chip--wide" data-suggest="Explorar todos os módulos e ferramentas"><span class="chip__label">🧩 Ver todas as ferramentas</span></button>
-        </div>
+              <button class="chip" data-suggest="Gerar página de vendas automática"><span class="chip__label">🌐 Gerar Landing Page</span></button>
+              <button class="chip" data-suggest="Aprender a vender com a Orion IA"><span class="chip__label">⚡ Vender com a Orion</span></button>
 
-      </section>
+              <button class="chip chip--wide" data-suggest="Explorar todos os módulos e ferramentas"><span class="chip__label">🧩 Ver todas as ferramentas</span></button>
+            </div>
+          </div>
+
+        </section>
+      </div>
 
       <section id="chat" class="chat" aria-live="polite" aria-label="Conversa com a Orion IA">
         <header class="chathead">
@@ -122,15 +131,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (shouldCenter) main.classList.add('centered');
 
   const hero = main.querySelector('.hero');
-  const search = main.querySelector('.search');
-  const chips = main.querySelector('.chips');
-  if (hero && search && chips && !main.querySelector('.intro')) {
-    const intro = document.createElement('div');
-    intro.className = 'intro';
-    hero.parentNode.insertBefore(intro, hero);
+  const intro = main.querySelector('.intro');
+  if (hero && intro && !intro.contains(hero)) {
     intro.appendChild(hero);
-    intro.appendChild(search);
-    intro.appendChild(chips);
   }
 });
 function orionUncenterOnce(){
