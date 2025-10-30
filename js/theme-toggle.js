@@ -160,18 +160,3 @@ if (prompt) {
   //   document.documentElement.classList.remove('chat-open');
   // }
 
- (function(){
-  const HERO_HEADLINE_HTML = 'Olá eu sou a <strong>Orion</strong>, uma IA criada para transformar ideias em negócios digitais reais.';
-
-  const container = document.querySelector('.hero-headline');
-  const title = container?.querySelector('.hero-title');
-  if (!container || !title) return;
-
-  title.innerHTML = HERO_HEADLINE_HTML;
-})();
-
-
-
-  
-
-
