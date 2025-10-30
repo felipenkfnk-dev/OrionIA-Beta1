@@ -1182,11 +1182,16 @@ body.light .cta-orion:active {
   transition: transform .4s ease, margin-top .4s ease;
 }
 
+/* ===========================
+   🔧 HERO WIDTH FIX (Orion IA)
+   Unifica largura da barra de busca com os chips
+   =========================== */
+
 :root {
-  --hero-max: 980px; /* mesmo valor usado nos chips */
+  --hero-max: 980px; /* mesma largura dos chips */
 }
 
-/* containers do hero centralizados com a mesma largura */
+/* aplica largura padrão ao bloco hero */
 .hero,
 .hero .hero-inner,
 .hero .search-wrap,
@@ -1197,18 +1202,28 @@ body.light .cta-orion:active {
   width: 100%;
 }
 
-/* caixa da busca */
-.search-wrap { width: 100%; }
+/* garante que a barra de busca ocupe toda a largura do container */
+.search-wrap {
+  width: 100%;
+}
 
-/* input e “botão seta” expandem corretamente */
+/* força input e botão da busca a expandirem corretamente */
 .search-input,
 .search-box,
 .search-bar,
-.search { width: 100%; }
+.search {
+  width: 100%;
+  max-width: 100% !important;
+}
 
-/* se existir largura fixa anterior, sobrescreve */
-.search-input,
-.search-box,
-.search-bar { max-width: 100% !important; }
+/* previne largura fixa herdada de versões anteriores */
+.hero input[type="text"],
+.hero .search input {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+
+
 
 
