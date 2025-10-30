@@ -780,3 +780,36 @@ html:not(.chat-open) .cta-orion.cta--mini{ animation: orionBreath 3.2s ease-in-o
   flex-shrink: 0;
 }
 
+/* ===== NUCLEAR SEARCH WIDTH FIX (v3.5.6-b) ===== */
+:root { --hero-max: 980px; }
+
+.hero .search-wrap,
+.hero .search,
+.hero .search-form,
+.hero form.search,
+.hero .search-box,
+.hero .search-bar {
+  max-width: var(--hero-max) !important;
+  width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.hero .search input[type="text"],
+.hero .search input[type="search"],
+.hero .search-input,
+.hero input.search-input {
+  flex: 1 1 auto !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+}
+
+.hero .search button,
+.hero .search-btn {
+  flex: 0 0 auto !important;
+}
+
