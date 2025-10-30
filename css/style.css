@@ -813,3 +813,97 @@ html:not(.chat-open) .cta-orion.cta--mini{ animation: orionBreath 3.2s ease-in-o
   flex: 0 0 auto !important;
 }
 
+/* ===========================
+   Orion IA — Hero Search Fix (v3.5.6c)
+   Restaura proporções e alinhamento da barra de busca
+   =========================== */
+
+:root {
+  --hero-max: 980px;
+}
+
+/* container da busca (hero-search) */
+.hero-search {
+  width: 100%;
+  max-width: var(--hero-max);
+  margin: 0 auto 24px; /* centraliza e dá respiro abaixo da headline */
+  display: flex;
+  justify-content: center;
+}
+
+/* corpo da busca */
+.hero-search .search {
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 12px;
+  background: linear-gradient(90deg, rgba(74,0,200,0.25), rgba(0,144,204,0.25));
+  padding: 0.75rem 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  transition: all 0.2s ease;
+}
+
+/* área do input */
+.hero-search .input {
+  display: flex;
+  align-items: center;
+  flex: 1 1 auto;
+  gap: 0.75rem;
+}
+
+/* input ocupa tudo */
+.hero-search input[type="text"] {
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+}
+
+/* botão de envio */
+.hero-search .send {
+  background: linear-gradient(90deg, #4a00c8, #0090cc);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.hero-search .send:hover {
+  transform: scale(1.05);
+}
+
+/* ícones dentro da busca */
+.hero-search svg {
+  color: #fff;
+  flex-shrink: 0;
+}
+
+/* ajusta grid dos chips */
+.chips-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 24px;
+  width: 100%;
+  max-width: var(--hero-max);
+  margin: 0 auto;
+}
+
+/* linha completa para o último chip */
+.chip.chip--full,
+.chips-grid .chip-full { grid-column: 1 / -1; }
+
+/* mobile */
+@media (max-width: 768px) {
+  .chips-grid { grid-template-columns: 1fr; }
+  .hero-search { margin-bottom: 16px; }
+}
+
+
