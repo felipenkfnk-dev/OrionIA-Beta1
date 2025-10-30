@@ -7,6 +7,36 @@
   <title>Orion IA: Vamos Criar Seu Negócio Digital?</title>
   <link rel="icon" href="img/logo.svg" />
   <link rel="stylesheet" href="css/style.css?v=3.5.6b-rescue">
+  <!-- Orion IA — emergency override (hero width) -->
+<style>
+  :root { --hero-max: 980px; }
+  .hero .search-wrap,
+  .hero .search,
+  .hero .search-form,
+  .hero form.search,
+  .hero .search-box,
+  .hero .search-bar {
+    max-width: var(--hero-max) !important;
+    width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+  }
+  .hero .search input[type="text"],
+  .hero .search input[type="search"],
+  .hero .search-input,
+  .hero input.search-input {
+    flex: 1 1 auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+  .hero .search button,
+  .hero .search-btn { flex: 0 0 auto !important; }
+</style>
+
   <link rel="stylesheet" href="css/style.mobile.css?v=350" media="(max-width: 767px)">
   <link rel="stylesheet" href="css/style.tablet.css?v=350" media="(min-width: 768px) and (max-width: 1199px)">
   <link rel="stylesheet" href="css/style.desktop.css?v=350" media="(min-width: 1200px)">
