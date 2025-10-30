@@ -1174,22 +1174,6 @@ body.light .cta-orion:active {
   transform: translateY(0) !important;
 }
 
-/* Animação suave da frase Orion */
-#orion-text {
-  display:inline-block;
-  transition:opacity .6s ease, transform .6s ease;
-}
-
-.fade-out {
-  opacity:0;
-  transform:translateY(6px);
-}
-
-.fade-in {
-  opacity:1;
-  transform:translateY(0);
-}
-
 /* Gradiente na palavra Orion */
 .orion-gradient {
   background: linear-gradient(90deg, #4015c9 0%, #7b4dfb 100%);
@@ -1243,74 +1227,9 @@ body.light .cta-orion:active {
   animation-delay: 3s;
 }
 
-/* === Suaviza o movimento do container da frase === */
-.orion-identity {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 56px; /* altura base p/ evitar salto */
-  transition: min-height .4s ease, margin-bottom .4s ease;
-}
-
-/* ajusta no mobile se quiser menor */
-@media (max-width:600px){
-  .orion-identity{
-    min-height: 64px;
-  }
-}
-
 /* transição sutil na caixa de busca ao realinhar */
 .hero .input {
   transition: transform .4s ease, margin-top .4s ease;
 }
 
-
-/* Orion — Respiração de Luz (sem nós extras) */
-:root{
-  --orion-fade-dur: 560ms;
-  --orion-fade-ease: cubic-bezier(.22,.61,.36,1);
-  --orion-blur-max: 1px;
-  --orion-lift: 2px;
-}
-
-@media (max-width: 480px){
-  :root{ --orion-blur-max: 0.7px; }
-}
-
-.orion-identity{
-  position: relative;
-  min-height: var(--orion-identity-minh, 3.2rem);
-  will-change: filter, opacity, transform;
-}
-
-#orion-text{
-  display: inline-block;
-  will-change: opacity, filter, transform;
-}
-
-/* animações chave com pico de blur no meio */
-@keyframes orionBreathIn {
-  0%   { opacity: 0; filter: blur(0); transform: translateY(var(--orion-lift)); }
-  45%  { opacity: 1; filter: blur(var(--orion-blur-max)); transform: translateY(0); }
-  100% { opacity: 1; filter: blur(0); transform: translateY(0); }
-}
-
-@keyframes orionBreathOut {
-  0%   { opacity: 1; filter: blur(0); transform: translateY(0); }
-  55%  { opacity: 0; filter: blur(var(--orion-blur-max)); transform: translateY(calc(var(--orion-lift) * -1)); }
-  100% { opacity: 0; filter: blur(0); transform: translateY(calc(var(--orion-lift) * -1)); }
-}
-
-/* classes aplicadas no #orion-text */
-#orion-text.is-entering{
-  animation: orionBreathIn var(--orion-fade-dur) var(--orion-fade-ease) both;
-}
-#orion-text.is-leaving{
-  animation: orionBreathOut var(--orion-fade-dur) var(--orion-fade-ease) both;
-}
-
-@media (prefers-reduced-motion: reduce){
-  :root{ --orion-fade-dur: 1ms; }
-  #orion-text{ animation: none !important; filter: none !important; transform: none !important; }
-}
 

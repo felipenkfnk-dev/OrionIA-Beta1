@@ -1,5 +1,11 @@
 :root {
   --hero-offset-x: 0px;
+  --hero-gap-desktop: 20px;
+  --hero-gap-mobile: 16px;
+  --search-h-desktop: 64px;
+  --search-h-mobile: 56px;
+  --chip-h-desktop: 44px;
+  --chip-h-mobile: 42px;
   --a:#6C00FF;
   --b:#005BFF;
   --transition:0.35s ease;
@@ -87,8 +93,17 @@ body.light .theme-thumb{ transform:translateX(16px); background:rgba(0,0,0,.85);
 
 /* Main centered */
 .main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 0}
-.hero{text-align:center;margin-bottom:10px}
-.hero h2{font-size:32px;margin-bottom:16px}
+.hero{display:grid;gap:var(--hero-gap-mobile);justify-items:center;text-align:center;margin-bottom:10px;width:100%}
+.hero-headline{position:relative;width:min(860px,100%);margin-inline:auto;height:var(--hero-title-height, auto);min-height:3.5rem;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.hero-title{position:relative;width:100%;height:100%;margin:0;font-size:32px;line-height:1.25;display:flex;align-items:center;justify-content:center;text-align:center}
+.hero-slide{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 8px;opacity:0;transform:translateY(6px);transition:opacity .24s ease,transform .24s ease;will-change:opacity,transform}
+.hero-slide.is-active{opacity:1;transform:translateY(0)}
+.orion-gradient{background:linear-gradient(90deg,#4015c9 0%,#7b4dfb 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-fill-color:transparent;font-weight:600;letter-spacing:.2px}
+.orion-gradient-animated{background:linear-gradient(90deg,#4015c9,#7b4dfb,#4015c9);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-fill-color:transparent;animation:shineGradient 5s linear infinite;font-weight:600;letter-spacing:.2px}
+@keyframes shineGradient{0%{background-position:0% center}100%{background-position:200% center}}
+.orion-gradient-animated.orion-delay-1{animation-delay:0s}
+.orion-gradient-animated.orion-delay-2{animation-delay:1.5s}
+.orion-gradient-animated.orion-delay-3{animation-delay:3s}
 
 /* Unified horizontal nudge for hero and chat (controlled by --hero-offset-x) */
 .hero .search,
@@ -96,8 +111,8 @@ body.light .theme-thumb{ transform:translateX(16px); background:rgba(0,0,0,.85);
 .chat{
   transform: translateX(var(--hero-offset-x));
 }
-.search{width:min( 860px,100%);display:flex;flex-direction:column;gap:10px}
-.input{display:flex;align-items:center;gap:10px;border-radius:18px;padding:12px 12px 12px 16px;border:1px solid transparent;
+.search{width:min(860px,100%);margin-inline:auto;display:flex;flex-direction:column;gap:10px}
+.input{display:flex;align-items:center;gap:10px;border-radius:18px;padding:12px 12px 12px 16px;border:1px solid transparent;min-height:var(--search-h-mobile);height:var(--search-h-mobile);
   background:linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)) padding-box,
             linear-gradient(145deg, rgba(108,0,255,0.65), rgba(0,173,255,0.5)) border-box;
   box-shadow:0 16px 40px rgba(5,9,24,0.42);
@@ -115,7 +130,7 @@ body.light .theme-thumb{ transform:translateX(16px); background:rgba(0,0,0,.85);
   transition:opacity var(--transition);
 }
 .input > *{position:relative;z-index:1;}
-.input input{flex:1;background:transparent;border:none;color:var(--text);outline:none;font-size:16px}
+.input input{flex:1;height:100%;background:transparent;border:none;color:var(--text);outline:none;font-size:16px}
 .input svg{color:var(--muted)}
 .input:focus-within::after{opacity:0.95}
 body.light .input{
@@ -136,8 +151,8 @@ body.light .input::after{
 .send:active{transform:translateY(1px)}
 .send svg{display:block}
 
-.chips{display:grid;gap:12px;width:100%;max-width:100%;margin-inline:auto;grid-template-columns:1fr}
-.chip{position:relative;z-index:0;padding:10px var(--chip-padding-x);border-radius:18px;border:1px solid transparent;font-size:14px;cursor:pointer;
+.chips{display:grid;gap:12px;width:100%;max-width:860px;margin-inline:auto;grid-template-columns:1fr}
+.chip{position:relative;z-index:0;padding:0 var(--chip-padding-x);border-radius:18px;border:1px solid transparent;font-size:14px;cursor:pointer;min-height:var(--chip-h-mobile);height:var(--chip-h-mobile);
   background:linear-gradient(140deg, rgba(255,255,255,0.12), rgba(255,255,255,0.02)) padding-box,
             linear-gradient(145deg, rgba(108,0,255,0.65), rgba(0,173,255,0.45)) border-box;
   color:var(--text);
@@ -189,12 +204,13 @@ footer{opacity:.75;text-align:center;margin:16px 0 8px;color:var(--muted)}
 @keyframes blink{50%{opacity:0;}}
 
 @media (max-width:640px){
-  .hero h2{font-size:24px}
+  .hero-title{font-size:24px}
   .chat .bubble{max-width:85%}
   .brand h1{font-size:16px}
 }
 
 @media (prefers-reduced-motion: reduce){
+  .hero-slide{transition:none !important;transform:translateY(0) !important;}
   .chip,
   .chip:hover{
     transition:none !important;
@@ -207,8 +223,12 @@ footer{opacity:.75;text-align:center;margin:16px 0 8px;color:var(--muted)}
 }
 
 @media (min-width:768px){
+  .hero{gap:var(--hero-gap-desktop);}
+  .input{min-height:var(--search-h-desktop);height:var(--search-h-desktop);}
+  .chip{min-height:var(--chip-h-desktop);height:var(--chip-h-desktop);}
   .chips{grid-template-columns:repeat(2, minmax(260px, 1fr));align-items:stretch;}
   .chip--wide{grid-column:1/-1;}
+  .intro{gap:var(--hero-gap-desktop);}
 }
 
 /* === Orion v3.3.x — Centralização e offsets === */
@@ -219,7 +239,7 @@ footer{opacity:.75;text-align:center;margin:16px 0 8px;color:var(--muted)}
   padding:0;
 }
 .intro{
-  display:flex; flex-direction:column; align-items:center; gap:14px;
+  display:flex; flex-direction:column; align-items:center; gap:var(--hero-gap-mobile);
   transform: translate(var(--intro-offset-x), var(--intro-offset-y));
   transition: transform .35s ease;
 }
@@ -279,20 +299,19 @@ footer{opacity:.75;text-align:center;margin:16px 0 8px;color:var(--muted)}
 /* === Ajuste refinado da introdução Orion === */
 .orion-identity{
   text-align:center;
-  font-size:0.02rem; /* menor e mais sutil */
   font-weight:400;
-  color:rgba(255,255,255,.75); /* leve e discreta */
-  line-height:1.4;
-  margin-bottom:1.4rem;
+  color:var(--text);
+  line-height:1.35;
+  margin:0;
   max-width:760px;
   margin-left:auto;
   margin-right:auto;
   opacity:0;
-  transform:translateY(10px);
+  transform:translateY(6px);
   animation:fadeInIntro 1.2s ease-out .4s forwards;
 }
 body.light .orion-identity{
-  color:rgba(11,15,26,.85);
+  color:var(--text);
 }
 .orion-identity strong{
   font-weight:600;
@@ -301,10 +320,8 @@ body.light .orion-identity{
 
 /* Animação de entrada */
 @keyframes fadeInIntro{
-  from{opacity:0; transform:translateY(10px);}
+  from{opacity:0; transform:translateY(6px);}
   to{opacity:1; transform:translateY(0);}
-}
-
 }
 
 /*Frase sobre - caixa de busca*/
