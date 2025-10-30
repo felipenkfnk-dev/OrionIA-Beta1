@@ -3,18 +3,6 @@
    Correção definitiva de alinhamento do search + chips
    ========================================================== */
 
-/* Orion — Desktop (>=1200px)
-   Centraliza visualmente hero e chat controlando a variável --hero-offset-x */
-@media (min-width: 1200px){
-  :root{ --hero-offset-x: -20px; }
-}
-@media (min-width: 1440px){
-  :root{ --hero-offset-x: -18px; }
-}
-@media (min-width: 1680px){
-  :root{ --hero-offset-x: -16px; }
-}
-
 /* Conforto visual do input */
 .hero-search .search-bar .input,
 .hero-search .search-bar form {

@@ -1,7 +1,6 @@
 :root {
-  --hero-offset-x: 0px;
-  --hero-gap-desktop: 20px;
-  --hero-gap-mobile: 16px;
+  --hero-gap-desktop: 24px;
+  --hero-gap-mobile: 24px;
   --search-h-desktop: 64px;
   --search-h-mobile: 56px;
   --chip-h-desktop: 44px;
@@ -93,43 +92,58 @@ body.light .theme-thumb{ transform:translateX(16px); background:rgba(0,0,0,.85);
 
 /* Main centered */
 .main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 0}
-.hero, .hero-title, .hero-search, .hero-chips, .hero-headline{transform:none !important;text-align:initial;}
-.hero{width:100%;padding-inline:5%;margin-bottom:10px;}
-.hero-title{display:block;}
+.hero, .hero-title, .hero-search, .hero-chips, .hero-headline{transform:none !important;}
+.hero{
+  width:100%;
+  padding-inline:5%;
+  margin-bottom:10px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:24px;
+  text-align:center;
+  overflow:hidden;
+}
+.hero-title{display:block;width:100%;}
 .hero-headline{
   max-width:980px;
-  margin:0 auto;
+  margin-inline:auto;
+  margin-block:0;
   text-align:center;
   white-space:normal;
   word-break:normal;
-  overflow-wrap:anywhere;
+  overflow:visible;
   font-size:32px;
   line-height:1.25;
-  font-weight:400;
+  font-weight:600;
   color:var(--text);
 }
 .hero-headline .brand{display:inline;font-weight:inherit;gap:0;align-items:unset;color:inherit;}
 .hero-search{
-  margin-top:16px;
   display:flex;
   justify-content:center;
+  width:100%;
 }
 .hero-search .search-bar{
   width:100%;
   max-width:980px;
   display:flex;
   flex-direction:column;
+  margin-inline:auto;
 }
 .hero-chips{
-  margin-top:16px;
   display:flex;
   justify-content:center;
+  width:100%;
 }
 .hero-chips .chip-grid{
   width:100%;
   max-width:980px;
   display:grid;
   gap:12px;
+  justify-content:center;
+  margin-inline:auto;
 }
 .orion-gradient{background:linear-gradient(90deg,#4015c9 0%,#7b4dfb 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-fill-color:transparent;font-weight:600;letter-spacing:.2px}
 .orion-gradient-animated{background:linear-gradient(90deg,#4015c9,#7b4dfb,#4015c9);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-fill-color:transparent;animation:shineGradient 5s linear infinite;font-weight:600;letter-spacing:.2px}
@@ -261,7 +275,6 @@ footer{opacity:.75;text-align:center;margin:16px 0 8px;color:var(--muted)}
 }
 
 /* === Orion v3.3.x — Centralização e offsets === */
-:root{ --intro-offset-x: 3vw; --intro-offset-y: 6vh; }
 .main.centered{
   min-height: calc(100dvh - 100px);
   display:flex; flex-direction:column; justify-content:center; align-items:center;
@@ -269,12 +282,13 @@ footer{opacity:.75;text-align:center;margin:16px 0 8px;color:var(--muted)}
 }
 .intro{
   display:flex; flex-direction:column; align-items:center; gap:var(--hero-gap-mobile);
-  transform: translate(var(--intro-offset-x), var(--intro-offset-y));
+  margin:0 auto;
+  transform:none;
   transition: transform .35s ease;
 }
 .centered .chat{ display:none; }
 @media (max-width:768px){
-  .intro{ transform: translate(0vw, 4vh); }
+  .intro{ transform:none; }
 }
 .centered .hero{ margin-bottom:8px; }
 .centered .hero-search{ margin-top:0; }
