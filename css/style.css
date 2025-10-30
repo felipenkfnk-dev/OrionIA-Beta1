@@ -739,4 +739,44 @@ html:not(.chat-open) .cta-orion.cta--mini{ animation: orionBreath 3.2s ease-in-o
 /* evita scroll lateral no hero */
 .hero { overflow-x: hidden; }
 
+/* ===========================
+   🧩 FIX — SEARCH WIDTH ALIGNMENT
+   (Deixa a barra de busca com a mesma largura dos chips)
+   =========================== */
+
+:root {
+  --hero-max: 980px;
+}
+
+/* força a barra de busca a ocupar o mesmo limite dos chips */
+.search-wrap {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: var(--hero-max);
+  margin: 0 auto;
+}
+
+/* remove limites internos antigos */
+.search-bar,
+.search-box,
+.search {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+}
+
+/* garante que o input ocupe todo o espaço disponível */
+.search input[type="text"],
+.search-input {
+  width: 100% !important;
+  max-width: 100% !important;
+  flex: 1 1 auto;
+}
+
+/* botão “seta” no canto direito sem quebrar */
+.search button,
+.search-btn {
+  flex-shrink: 0;
+}
 
