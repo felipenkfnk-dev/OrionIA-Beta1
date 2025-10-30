@@ -124,13 +124,13 @@ body.light .theme-thumb{ transform:translateX(16px); background:rgba(0,0,0,.85);
   display:flex;
   justify-content:center;
   width:100%;
+  max-width:980px;
+  margin-inline:auto;
 }
 .hero-search .search-bar{
   width:100%;
-  max-width:980px;
   display:flex;
   flex-direction:column;
-  margin-inline:auto;
 }
 .hero-chips{
   display:flex;
@@ -152,8 +152,9 @@ body.light .theme-thumb{ transform:translateX(16px); background:rgba(0,0,0,.85);
   .hero-headline{
     font-size:28px;
   }
+  .hero-search{max-width:100%;}
   .hero-search .search-bar{max-width:100%;}
-  .hero-chips .chip-grid{grid-template-columns:1fr;}
+  .hero-chips .chip-grid{grid-template-columns:1fr;max-width:100%;}
 }
 .orion-gradient-animated.orion-delay-1{animation-delay:0s}
 .orion-gradient-animated.orion-delay-2{animation-delay:1.5s}
