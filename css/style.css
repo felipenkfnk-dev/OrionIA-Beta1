@@ -136,7 +136,7 @@ body.light .input::after{
 .send:active{transform:translateY(1px)}
 .send svg{display:block}
 
-.chips{display:grid;gap:12px;width:100%;max-width:100%;margin-inline:auto;grid-template-columns:minmax(0,1fr)}
+.chips{display:grid;gap:12px;width:100%;max-width:100%;margin-inline:auto;grid-template-columns:1fr}
 .chip{position:relative;z-index:0;padding:10px var(--chip-padding-x);border-radius:18px;border:1px solid transparent;font-size:14px;cursor:pointer;
   background:linear-gradient(140deg, rgba(255,255,255,0.12), rgba(255,255,255,0.02)) padding-box,
             linear-gradient(145deg, rgba(108,0,255,0.65), rgba(0,173,255,0.45)) border-box;
@@ -202,10 +202,13 @@ footer{opacity:.75;text-align:center;margin:16px 0 8px;color:var(--muted)}
   }
 }
 
-.chip--wide{grid-column:1/-1;}
+@media (max-width:767px){
+  .chips{grid-template-columns:1fr;}
+}
 
 @media (min-width:768px){
   .chips{grid-template-columns:repeat(2, minmax(260px, 1fr));align-items:stretch;}
+  .chip--wide{grid-column:1/-1;}
 }
 
 /* === Orion v3.3.x — Centralização e offsets === */
