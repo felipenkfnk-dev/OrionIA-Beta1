@@ -93,11 +93,11 @@ body.light .theme-thumb{ transform:translateX(16px); background:rgba(0,0,0,.85);
 
 /* Main centered */
 .main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 0}
-.hero{display:grid;gap:var(--hero-gap-mobile);justify-items:center;text-align:center;margin-bottom:10px;width:100%}
+.hero{display:grid;gap:var(--hero-gap-mobile);justify-items:center;text-align:center;margin-bottom:10px;width:100%;overflow-x:hidden}
 .hero-headline{
   max-width: min(92vw, 980px);
   margin: 0 auto;
-  text-align: center;
+  text-align: left;
   white-space: normal;
   word-break: normal;
   overflow-wrap: anywhere;
@@ -106,12 +106,23 @@ body.light .theme-thumb{ transform:translateX(16px); background:rgba(0,0,0,.85);
   font-weight: 400;
   justify-self: center;
   color: var(--text);
+  transform: translateX(-5%);
 }
 .orion-gradient{background:linear-gradient(90deg,#4015c9 0%,#7b4dfb 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-fill-color:transparent;font-weight:600;letter-spacing:.2px}
 .orion-gradient-animated{background:linear-gradient(90deg,#4015c9,#7b4dfb,#4015c9);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-fill-color:transparent;animation:shineGradient 5s linear infinite;font-weight:600;letter-spacing:.2px}
 @keyframes shineGradient{0%{background-position:0% center}100%{background-position:200% center}}
+@media (max-width:1024px){
+  .hero-headline{
+    transform: translateX(-3%);
+  }
+}
+
 @media (max-width:767px){
-  .hero-headline{font-size:28px;}
+  .hero-headline{
+    font-size:28px;
+    text-align:center;
+    transform:none;
+  }
 }
 .orion-gradient-animated.orion-delay-1{animation-delay:0s}
 .orion-gradient-animated.orion-delay-2{animation-delay:1.5s}
