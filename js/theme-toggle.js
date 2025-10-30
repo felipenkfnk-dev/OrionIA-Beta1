@@ -167,48 +167,94 @@ const frases = [
   'Vamos <strong class="orion-gradient-animated orion-delay-3">começar</strong> a construir o<br>futuro do seu projeto hoje?'
 ];
 
+  const container = document.querySelector('.hero-headline');
+  const title = container?.querySelector('.hero-title');
+  if (!container || !title) return;
 
+  title.innerHTML = '';
+  const slides = frases.map((frase, index) => {
+    const span = document.createElement('span');
+    span.className = 'hero-slide';
+    if (index === 0) span.classList.add('is-active');
+    span.innerHTML = frase;
+    title.appendChild(span);
+    return span;
+  });
 
-
-
-
-  const el = document.getElementById('orion-text');
-  if(!el) return;
-
-  const probe = document.createElement('span');
-  probe.style.visibility = 'hidden';
-  probe.style.position = 'absolute';
-  probe.style.left = '-9999px';
-  document.body.appendChild(probe);
-  let maxH = 0;
-  frases.forEach(f => { probe.innerHTML = f; maxH = Math.max(maxH, probe.offsetHeight); });
-  document.body.removeChild(probe);
-  document.querySelector('.orion-identity')?.style.setProperty('--orion-identity-minh', (maxH || 52) + 'px');
-
-  let i = 0, timer = null;
+  let activeIndex = 0;
+  let timer = null;
   const PERIOD = 5000;
-  const FADE = 560;
 
-  function setHTML(html){ el.innerHTML = html; }
-
-  function step(){
-    el.classList.remove('is-entering');
-    el.classList.add('is-leaving');
-    setTimeout(() => {
-      i = (i + 1) % frases.length;
-      setHTML(frases[i]);
-      el.classList.remove('is-leaving');
-      void el.offsetWidth;
-      el.classList.add('is-entering');
-    }, FADE);
+  function show(index){
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('is-active', i === index);
+    });
+    activeIndex = index;
   }
+
+  function measure(){
+    if (!slides.length) return;
+    const snapshots = slides.map(slide => ({
+      position: slide.style.position,
+      opacity: slide.style.opacity,
+      visibility: slide.style.visibility,
+      transform: slide.style.transform
+    }));
+
+    slides.forEach(slide => {
+      slide.style.position = 'static';
+      slide.style.opacity = '1';
+      slide.style.visibility = 'hidden';
+      slide.style.transform = 'none';
+    });
+
+    const maxHeight = slides.reduce((max, slide) => Math.max(max, slide.offsetHeight), 0);
+
+    slides.forEach((slide, idx) => {
+      const state = snapshots[idx];
+      slide.style.position = state.position || '';
+      slide.style.opacity = state.opacity || '';
+      slide.style.visibility = state.visibility || '';
+      slide.style.transform = state.transform || '';
+    });
+
+    if (maxHeight) {
+      container.style.setProperty('--hero-title-height', `${maxHeight}px`);
+    }
+  }
+
+  function requestMeasure(){
+    if (typeof requestAnimationFrame === 'function') {
+      requestAnimationFrame(measure);
+    } else {
+      measure();
+    }
+  }
+
+  requestMeasure();
+  window.setTimeout(requestMeasure, 250);
+
+  let resizeTimer = null;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = window.setTimeout(requestMeasure, 150);
+  });
 
   function play(){
+    if (slides.length <= 1) return;
     if (timer) clearInterval(timer);
-    el.classList.add('is-entering');
-    timer = setInterval(step, PERIOD);
+    timer = setInterval(() => {
+      const next = (activeIndex + 1) % slides.length;
+      show(next);
+    }, PERIOD);
   }
-  function pause(){ if (timer){ clearInterval(timer); timer = null; } }
+
+  function pause(){
+    if (timer) {
+      clearInterval(timer);
+      timer = null;
+    }
+  }
 
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) pause(); else play();
@@ -218,12 +264,33 @@ const frases = [
   const SCROLL_LIMIT = 120;
   window.addEventListener('scroll', () => {
     const y = window.scrollY || window.pageYOffset;
-    if (!pausedByScroll && y > SCROLL_LIMIT){ pausedByScroll = true; pause(); }
-    else if (pausedByScroll && y <= SCROLL_LIMIT){ pausedByScroll = false; play(); }
+    if (!pausedByScroll && y > SCROLL_LIMIT) {
+      pausedByScroll = true;
+      pause();
+    } else if (pausedByScroll && y <= SCROLL_LIMIT) {
+      pausedByScroll = false;
+      play();
+    }
   }, { passive: true });
 
-  setHTML(frases[0]);
-  play();
+  const motionQuery = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (motionQuery) {
+    const handleMotionChange = (event) => {
+      if (event.matches) {
+        requestMeasure();
+      }
+    };
+    if (typeof motionQuery.addEventListener === 'function') {
+      motionQuery.addEventListener('change', handleMotionChange);
+    } else if (typeof motionQuery.addListener === 'function') {
+      motionQuery.addListener(handleMotionChange);
+    }
+  }
+
+  show(activeIndex);
+  if (!document.hidden) {
+    play();
+  }
 })();
 
 
