@@ -58,14 +58,14 @@ header{display:flex;align-items:center;justify-content:space-between;gap:16px;ma
 /* Orion v3.5.1 — micro animações e foco acessível */
 .o-btn,
 .hero button,
-.chips button,
+.hero-chips button,
 .btn,
 .send,
 .theme-pill{transition:background-color .25s ease,color .25s ease,transform .25s ease,box-shadow .25s ease,opacity .25s ease}
 
 .o-btn:focus-visible,
 .hero button:focus-visible,
-.chips button:focus-visible,
+.hero-chips button:focus-visible,
 .btn:focus-visible,
 .send:focus-visible,
 .theme-pill:focus-visible{outline:0;box-shadow:0 0 0 3px rgba(124,77,255,.45),0 14px 32px rgba(59,27,255,.22);border-color:rgba(124,77,255,.65)}
@@ -93,48 +93,59 @@ body.light .theme-thumb{ transform:translateX(16px); background:rgba(0,0,0,.85);
 
 /* Main centered */
 .main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 0}
-.hero{display:grid;gap:var(--hero-gap-mobile);justify-items:center;text-align:center;margin-bottom:10px;width:100%;overflow-x:hidden}
+.hero, .hero-title, .hero-search, .hero-chips, .hero-headline{transform:none !important;text-align:initial;}
+.hero{width:100%;padding-inline:5%;margin-bottom:10px;}
+.hero-title{display:block;}
 .hero-headline{
-  max-width: min(92vw, 980px);
-  margin: 0 auto;
-  text-align: left;
-  white-space: normal;
-  word-break: normal;
-  overflow-wrap: anywhere;
-  font-size: 32px;
-  line-height: 1.25;
-  font-weight: 400;
-  justify-self: center;
-  color: var(--text);
-  transform: translateX(-5%);
+  max-width:980px;
+  margin:0 auto;
+  text-align:center;
+  white-space:normal;
+  word-break:normal;
+  overflow-wrap:anywhere;
+  font-size:32px;
+  line-height:1.25;
+  font-weight:400;
+  color:var(--text);
+}
+.hero-headline .brand{display:inline;font-weight:inherit;gap:0;align-items:unset;color:inherit;}
+.hero-search{
+  margin-top:16px;
+  display:flex;
+  justify-content:center;
+}
+.hero-search .search-bar{
+  width:100%;
+  max-width:980px;
+  display:flex;
+  flex-direction:column;
+}
+.hero-chips{
+  margin-top:16px;
+  display:flex;
+  justify-content:center;
+}
+.hero-chips .chip-grid{
+  width:100%;
+  max-width:980px;
+  display:grid;
+  gap:12px;
 }
 .orion-gradient{background:linear-gradient(90deg,#4015c9 0%,#7b4dfb 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-fill-color:transparent;font-weight:600;letter-spacing:.2px}
 .orion-gradient-animated{background:linear-gradient(90deg,#4015c9,#7b4dfb,#4015c9);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-fill-color:transparent;animation:shineGradient 5s linear infinite;font-weight:600;letter-spacing:.2px}
 @keyframes shineGradient{0%{background-position:0% center}100%{background-position:200% center}}
-@media (max-width:1024px){
-  .hero-headline{
-    transform: translateX(-3%);
-  }
-}
-
 @media (max-width:767px){
   .hero-headline{
     font-size:28px;
-    text-align:center;
-    transform:none;
   }
+  .hero-search .search-bar{max-width:100%;}
+  .hero-chips .chip-grid{grid-template-columns:1fr;}
 }
 .orion-gradient-animated.orion-delay-1{animation-delay:0s}
 .orion-gradient-animated.orion-delay-2{animation-delay:1.5s}
 .orion-gradient-animated.orion-delay-3{animation-delay:3s}
 
-/* Unified horizontal nudge for hero and chat (controlled by --hero-offset-x) */
-.hero .search,
-.hero .chips,
-.chat{
-  transform: translateX(var(--hero-offset-x));
-}
-.search{width:min(860px,100%);margin-inline:auto;display:flex;flex-direction:column;gap:10px}
+.search{width:100%;margin-inline:auto;display:flex;flex-direction:column;gap:10px}
 .input{display:flex;align-items:center;gap:10px;border-radius:18px;padding:12px 12px 12px 16px;border:1px solid transparent;min-height:var(--search-h-mobile);height:var(--search-h-mobile);
   background:linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)) padding-box,
             linear-gradient(145deg, rgba(108,0,255,0.65), rgba(0,173,255,0.5)) border-box;
@@ -174,7 +185,7 @@ body.light .input::after{
 .send:active{transform:translateY(1px)}
 .send svg{display:block}
 
-.chips{display:grid;gap:12px;width:100%;max-width:860px;margin-inline:auto;grid-template-columns:1fr}
+.hero-chips .chip-grid{grid-template-columns:1fr;}
 .chip{position:relative;z-index:0;padding:0 var(--chip-padding-x);border-radius:18px;border:1px solid transparent;font-size:14px;cursor:pointer;min-height:var(--chip-h-mobile);height:var(--chip-h-mobile);
   background:linear-gradient(140deg, rgba(255,255,255,0.12), rgba(255,255,255,0.02)) padding-box,
             linear-gradient(145deg, rgba(108,0,255,0.65), rgba(0,173,255,0.45)) border-box;
@@ -240,16 +251,12 @@ footer{opacity:.75;text-align:center;margin:16px 0 8px;color:var(--muted)}
   }
 }
 
-@media (max-width:767px){
-  .chips{grid-template-columns:1fr;}
-}
-
 @media (min-width:768px){
-  .hero{gap:var(--hero-gap-desktop);}
   .input{min-height:var(--search-h-desktop);height:var(--search-h-desktop);}
   .chip{min-height:var(--chip-h-desktop);height:var(--chip-h-desktop);}
-  .chips{grid-template-columns:repeat(2, minmax(260px, 1fr));align-items:stretch;}
-  .chip--wide{grid-column:1/-1;}
+  .hero-search .search-bar{max-width:980px;}
+  .hero-chips .chip-grid{grid-template-columns:repeat(2, minmax(260px, 1fr));align-items:stretch;}
+  .hero-chips .chip-grid .chip--wide{grid-column:1/-1;}
   .intro{gap:var(--hero-gap-desktop);}
 }
 
@@ -270,8 +277,8 @@ footer{opacity:.75;text-align:center;margin:16px 0 8px;color:var(--muted)}
   .intro{ transform: translate(0vw, 4vh); }
 }
 .centered .hero{ margin-bottom:8px; }
-.centered .search{ margin-top:0; }
-.centered .chips{ margin-top:0; }
+.centered .hero-search{ margin-top:0; }
+.centered .hero-chips{ margin-top:0; }
 
 /* Orion v3.3.3 — Premium rounded logo */
 .logo{
